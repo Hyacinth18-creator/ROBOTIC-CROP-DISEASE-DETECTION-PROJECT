@@ -221,6 +221,88 @@ body.menu-open {
   color: var(--smartai-green-dark);
 }
 
+.app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  background: rgb(15 23 42 / 0.42);
+  backdrop-filter: blur(14px);
+}
+
+.app-loader[hidden] {
+  display: none;
+}
+
+.app-loader-panel {
+  display: grid;
+  width: min(28rem, calc(100vw - 2rem));
+  justify-items: center;
+  border: 1px solid rgb(255 255 255 / 0.72);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0 28px 70px rgb(15 23 42 / 0.22);
+  text-align: center;
+}
+
+.app-loader-mark {
+  position: relative;
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #eaf8ee;
+  color: var(--smartai-green);
+}
+
+.app-loader-mark::before,
+.app-loader-mark::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+}
+
+.app-loader-mark::before {
+  inset: 0;
+  border: 0.28rem solid rgb(22 163 74 / 0.16);
+  border-top-color: var(--smartai-green);
+  animation: smartai-spin 900ms linear infinite;
+}
+
+.app-loader-mark::after {
+  width: 1.35rem;
+  height: 1.35rem;
+  background: currentColor;
+  clip-path: ellipse(38% 50% at 50% 50%);
+  transform: rotate(35deg);
+}
+
+.app-loader-title {
+  margin: 1.2rem 0 0;
+  color: var(--smartai-ink);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.app-loader-copy {
+  max-width: 22rem;
+  margin: 0.55rem 0 0;
+  color: #475569;
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+@keyframes smartai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (min-width: 1024px) {
   body.menu-open {
     overflow: auto;
