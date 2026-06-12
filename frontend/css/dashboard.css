@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap");
+
 :root {
   --dashboard-bg: #eef1ef;
   --dashboard-surface: #ffffff;
@@ -12,6 +14,7 @@
 
 .dashboard-body {
   background: var(--dashboard-bg);
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .sr-only {
@@ -38,7 +41,13 @@
   border-right: 1px solid var(--dashboard-border);
   background: var(--dashboard-surface);
   padding: 1.25rem;
-  transition: transform 180ms ease;
+}
+
+.sidebar-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .dashboard-brand {
@@ -102,7 +111,7 @@
   font-weight: 800;
   text-decoration: none;
   text-align: left;
-  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
 .dashboard-nav-link {
@@ -115,10 +124,6 @@
   background: var(--dashboard-green-soft);
   color: var(--dashboard-green-dark);
   outline: none;
-}
-
-.dashboard-nav-link:hover {
-  transform: translateX(2px);
 }
 
 .dashboard-logout {
@@ -134,7 +139,7 @@
 
 .nav-svg,
 .search-icon,
-.icon-bell,
+.notification-svg,
 .export-icon,
 .chevron,
 .stat-icon,
@@ -185,7 +190,7 @@
   background: #f3f7fb;
   color: #4f46e5;
   cursor: pointer;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
 .mobile-nav-toggle:hover,
@@ -193,7 +198,6 @@
 .icon-button:hover {
   border-color: #dbe4ef;
   background: #edf3f8;
-  transform: translateY(-1px);
 }
 
 .mobile-nav-toggle:focus,
@@ -222,6 +226,7 @@
 
 .sidebar-toggle {
   display: none;
+  flex: 0 0 auto;
 }
 
 .menu-svg {
@@ -236,13 +241,11 @@
 
 .menu-svg-close,
 .menu-svg-panel,
-.mobile-nav-toggle[aria-expanded="true"] .menu-svg-open,
-.dashboard-body.sidebar-collapsed .sidebar-toggle .menu-svg-open {
+.mobile-nav-toggle[aria-expanded="true"] .menu-svg-open {
   display: none;
 }
 
-.mobile-nav-toggle[aria-expanded="true"] .menu-svg-close,
-.dashboard-body.sidebar-collapsed .sidebar-toggle .menu-svg-panel {
+.mobile-nav-toggle[aria-expanded="true"] .menu-svg-close {
   display: block;
 }
 
@@ -346,35 +349,20 @@
   position: relative;
 }
 
-.icon-bell {
-  width: 0.95rem;
-  height: 1.05rem;
-  border: 2px solid currentColor;
-  border-bottom: 0;
-  border-radius: 0.65rem 0.65rem 0.25rem 0.25rem;
+.notification-svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  fill: none;
+  stroke: #4f46e5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
 }
 
-.icon-bell::after {
-  position: absolute;
-  bottom: -0.32rem;
-  left: 50%;
-  width: 0.45rem;
-  height: 0.2rem;
-  border-radius: 0 0 999px 999px;
-  background: currentColor;
-  content: "";
-  transform: translateX(-50%);
-}
-
-.notification-dot {
-  position: absolute;
-  top: 0.45rem;
-  right: 0.45rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  background: var(--dashboard-green);
+.notification-svg-dot {
+  fill: var(--dashboard-green);
+  stroke: #ffffff;
+  stroke-width: 1.8;
 }
 
 .profile-button {
@@ -537,14 +525,13 @@
   gap: 0.9rem;
   padding: 1rem;
   cursor: pointer;
-  transition: transform 160ms ease, border-color 160ms ease;
+  transition: border-color 160ms ease;
 }
 
 .kpi-card:hover,
 .kpi-card:focus {
   border-color: rgb(22 163 74 / 0.45);
   outline: none;
-  transform: translateY(-2px);
 }
 
 .kpi-card h2,
@@ -1107,12 +1094,11 @@ td {
   padding: 0.85rem 1rem;
   font-size: 0.85rem;
   font-weight: 800;
-  transition: opacity 180ms ease, transform 180ms ease;
+  transition: opacity 180ms ease;
 }
 
 .toast.is-hiding {
   opacity: 0;
-  transform: translateY(0.5rem);
 }
 
 @media (min-width: 560px) {
@@ -1151,11 +1137,24 @@ td {
   }
 
   .dashboard-body.sidebar-collapsed .dashboard-sidebar {
-    transform: translateX(-100%);
+    width: 5.75rem;
+    align-items: center;
+    padding: 1.5rem 1rem;
   }
 
   .dashboard-body.sidebar-collapsed .dashboard-main {
-    margin-left: 0;
+    margin-left: 5.75rem;
+  }
+
+  .dashboard-body.sidebar-collapsed .sidebar-brand-row {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dashboard-body.sidebar-collapsed .dashboard-brand,
+  .dashboard-body.sidebar-collapsed .dashboard-nav,
+  .dashboard-body.sidebar-collapsed .dashboard-logout {
+    display: none;
   }
 
   .dashboard-grid {
@@ -1196,7 +1195,7 @@ td {
   }
 
   .dashboard-body.sidebar-collapsed .dashboard-main {
-    margin-left: 0;
+    margin-left: 5.75rem;
   }
 
   .kpi-grid {

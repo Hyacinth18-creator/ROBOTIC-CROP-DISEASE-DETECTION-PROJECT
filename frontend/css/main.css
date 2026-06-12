@@ -150,16 +150,12 @@ body.menu-open {
   font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
 .btn:focus {
   outline: 2px solid var(--smartai-green);
   outline-offset: 3px;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
 }
 
 .btn-primary {
