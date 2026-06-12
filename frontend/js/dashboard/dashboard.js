@@ -1,43 +1,7 @@
 const dashboardState = {
-  section: "dashboard",
   period: "month",
   healthView: "all",
   taskExpanded: false,
-};
-
-const dashboardSections = {
-  dashboard: {
-    title: "Good Morning!",
-    description: "Monitor crop disease risks and precision treatment insights.",
-  },
-  "disease-detection": {
-    title: "Disease Detection",
-    description: "Review AI scan results, disease pressure, and field triage priorities.",
-  },
-  "farm-simulation": {
-    title: "Farm Simulation",
-    description: "Model field monitoring routes and autonomous scouting coverage.",
-  },
-  "treatment-history": {
-    title: "Treatment History",
-    description: "Track treatment actions, responsible teams, and treatment outcomes.",
-  },
-  analytics: {
-    title: "Analytics",
-    description: "Compare crop health trends, detection accuracy, and risk movement.",
-  },
-  reports: {
-    title: "Reports",
-    description: "Export farm intelligence for operations, agronomists, and stakeholders.",
-  },
-  profile: {
-    title: "Profile",
-    description: "Manage farm operator details and SmartAI account preferences.",
-  },
-  settings: {
-    title: "Settings",
-    description: "Configure alerts, crop thresholds, and dashboard behavior.",
-  },
 };
 
 const kpiData = [
@@ -140,9 +104,6 @@ const summaryItems = [
 ];
 
 const selectors = {
-  sectionTitle: "[data-section-title]",
-  sectionDescription: "[data-section-description]",
-  navLink: "[data-dashboard-section]",
   mobileNav: "[data-mobile-nav]",
   mobileToggle: "[data-mobile-nav-toggle]",
   mobileLabel: "[data-mobile-nav-label]",
@@ -161,13 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function bindDashboardEvents() {
-  document.querySelectorAll(`.dashboard-sidebar ${selectors.navLink}`).forEach((button) => {
-    button.addEventListener("click", () => {
-      setSection(button.dataset.dashboardSection);
-      closeMobileNav();
-    });
-  });
-
   document.querySelector(selectors.mobileToggle)?.addEventListener("click", toggleMobileNav);
   document.querySelector(selectors.sidebarToggle)?.addEventListener("click", toggleSidebar);
 
@@ -231,11 +185,7 @@ function renderMobileNav() {
   mobileList.innerHTML = "";
   desktopButtons.forEach((button) => {
     const clone = button.cloneNode(true);
-    clone.classList.remove("is-active");
-    clone.addEventListener("click", () => {
-      setSection(clone.dataset.dashboardSection);
-      closeMobileNav();
-    });
+    clone.addEventListener("click", closeMobileNav);
     mobileList.append(clone);
   });
 }
@@ -407,19 +357,6 @@ function renderSummary() {
   `).join("");
 }
 
-function setSection(section) {
-  const content = dashboardSections[section] || dashboardSections.dashboard;
-  dashboardState.section = section;
-  document.querySelector(selectors.sectionTitle).textContent = content.title;
-  document.querySelector(selectors.sectionDescription).textContent = content.description;
-
-  document.querySelectorAll(selectors.navLink).forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.dashboardSection === section);
-  });
-
-  showToast(`${content.title} selected.`);
-}
-
 function toggleSidebar() {
   const toggle = document.querySelector(selectors.sidebarToggle);
   const label = document.querySelector(selectors.sidebarLabel);
@@ -476,7 +413,7 @@ function closeMobileNav() {
 function exportDashboard() {
   const payload = {
     exportedAt: new Date().toISOString(),
-    section: dashboardState.section,
+    section: "dashboard",
     period: dashboardState.period,
     kpis: kpiData,
     cropHealth: healthData[dashboardState.healthView],

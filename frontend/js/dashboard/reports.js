@@ -1,28 +1,24 @@
+const reports = [
+  ["Disease Summary", "Generated 12 Jun 2026", "Ready"],
+  ["Treatment Audit", "Generated 11 Jun 2026", "Ready"],
+  ["Farm Performance", "Draft updated today", "Draft"],
+];
+
 document.addEventListener("DOMContentLoaded", () => {
   initShell();
-
-  document.querySelector("[data-run-route]")?.addEventListener("click", () => {
-    document.querySelector("[data-robot-marker]")?.classList.toggle("is-running");
-    prependLog("Simulation route started.");
-    showToast("Farm simulation is running.");
+  renderReports();
+  document.querySelector("[data-create-report]")?.addEventListener("click", () => {
+    reports.unshift(["Custom Farm Report", "Generated now", "Ready"]);
+    renderReports();
+    showToast("New report created.");
   });
-
-  document.querySelector("[data-optimize-route]")?.addEventListener("click", () => {
-    prependLog("Route optimized for disease hotspot coverage.");
-    showToast("Route optimized for 91% field coverage.");
-  });
-
-  document.querySelector("[data-coverage-range]")?.addEventListener("input", (event) => {
-    document.querySelector("[data-coverage-value]").textContent = `${event.target.value}%`;
-  });
+  document.querySelector("[data-preview-report]")?.addEventListener("click", () => showToast("Report preview opened."));
 });
 
-function prependLog(message) {
-  const log = document.querySelector("[data-run-log]");
-  if (!log) return;
-  const item = document.createElement("li");
-  item.textContent = message;
-  log.prepend(item);
+function renderReports() {
+  const list = document.querySelector("[data-report-list]");
+  if (!list) return;
+  list.innerHTML = reports.map(([name, date, status]) => `<li>${name}<span>${date} - ${status}</span></li>`).join("");
 }
 
 function initShell() {
@@ -47,11 +43,9 @@ function bindShellEvents() {
   document.querySelector("[data-sidebar-toggle]")?.addEventListener("click", toggleSidebar);
   document.querySelector("[data-search-form]")?.addEventListener("submit", (event) => {
     event.preventDefault();
-    showToast("Simulation search is ready for backend route filtering.");
+    showToast("Report search is ready for backend filtering.");
   });
-  document.querySelectorAll("[data-toast]").forEach((button) => {
-    button.addEventListener("click", () => showToast(button.dataset.toast));
-  });
+  document.querySelectorAll("[data-toast]").forEach((button) => button.addEventListener("click", () => showToast(button.dataset.toast)));
 }
 
 function toggleSidebar() {

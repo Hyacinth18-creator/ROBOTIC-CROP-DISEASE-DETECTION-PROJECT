@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartAI disease detection workspace for crop image scans, AI confidence, and field risk triage.">
+  <title>SmartAI | Disease Detection</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/dashboard.css">
+  <link rel="stylesheet" href="../../css/diseasedetection.css">
+  <script src="../../js/dashboard/detection.js" defer></script>
+</head>
+<body class="dashboard-body" data-page="diseasedetection">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="SmartAI dashboard navigation">
+      <a class="dashboard-brand" href="../landing/index.html" aria-label="SmartAI home"><span class="dashboard-brand-mark" aria-hidden="true">SA</span><span><span class="dashboard-brand-name">SmartAI</span><span class="dashboard-brand-subtitle">Crop Intelligence</span></span></a>
+      <nav class="dashboard-nav" aria-label="Dashboard sections">
+        <a class="dashboard-nav-link" href="dashboard.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg><span>Dashboard</span></a>
+        <a class="dashboard-nav-link is-active" href="diseasedetection.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg><span>Disease Detection</span></a>
+        <a class="dashboard-nav-link" href="farmsimulation.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 21 12 12 21 3 12z"></path></svg><span>Farm Simulation</span></a>
+        <a class="dashboard-nav-link" href="treatmenthistory.html"><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg><span>Treatment History</span></a>
+        <a class="dashboard-nav-link" href="analytics.html"><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 20V12M12 20V5M18 20v-9"></path></svg><span>Analytics</span></a>
+        <a class="dashboard-nav-link" href="reports.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path></svg><span>Reports</span></a>
+        <a class="dashboard-nav-link" href="profile.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0z"></path></svg><span>Profile</span></a>
+        <a class="dashboard-nav-link" href="settings.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 2 4 4-1-1 4 4 3-4 3 1 4-4-1-2 4-2-4-4 1 1-4-4-3 4-3-1-4 4 1z"></path></svg><span>Settings</span></a>
+      </nav>
+      <button class="dashboard-logout" type="button" data-toast="Session controls are ready for backend logout wiring."><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 6H5v12h5M13 8l4 4-4 4M17 12H9"></path></svg><span>Log Out</span></button>
+    </aside>
+    <div class="dashboard-mobile-bar"><a class="dashboard-brand dashboard-brand-mobile" href="../landing/index.html" aria-label="SmartAI home"><span class="dashboard-brand-mark" aria-hidden="true">SA</span><span><span class="dashboard-brand-name">SmartAI</span><span class="dashboard-brand-subtitle">Crop Intelligence</span></span></a><button class="mobile-nav-toggle" type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-dashboard-nav"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-close" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"></path></svg><span class="sr-only" data-mobile-nav-label>Open dashboard navigation</span></button></div>
+    <div class="mobile-nav-panel" id="mobile-dashboard-nav" data-mobile-nav hidden><nav class="mobile-nav-list" aria-label="Mobile dashboard sections"></nav></div>
+    <main class="dashboard-main detection-main" id="main-content">
+      <header class="dashboard-topbar">
+        <div class="topbar-left"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="dashboard-sidebar"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-panel" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9 5v14M14 9l3 3-3 3"></path></svg><span class="sr-only" data-sidebar-toggle-label>Close sidebar</span></button><form class="dashboard-search" data-search-form><label class="sr-only" for="detection-search">Search detections</label><span class="search-icon" aria-hidden="true"></span><input id="detection-search" type="search" name="query" placeholder="Search disease scans..." autocomplete="off"></form></div>
+        <div class="topbar-actions"><button class="icon-button" type="button" data-toast="3 disease alerts need review." aria-label="View notifications"><svg class="notification-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 10a4 4 0 0 1 8 0v4.4l1.5 2.1h-11L8 14.4V10z"></path><path d="M10 19a2 2 0 0 0 4 0"></path><circle class="notification-svg-dot" cx="18" cy="6" r="3"></circle></svg></button><button class="profile-button" type="button" data-toast="Profile menu is ready."><span class="profile-avatar" aria-hidden="true">AF</span><span class="profile-copy"><span class="profile-name">Albert Flores</span><span class="profile-role">AI Farm Manager</span></span><span class="chevron" aria-hidden="true"></span></button></div>
+      </header>
+      <section class="page-hero detection-hero">
+        <div><p class="page-kicker">AI scan workspace</p><h1>Disease Detection</h1><p>Upload crop imagery, inspect disease probabilities, and route risky findings into treatment workflows.</p></div>
+        <button class="scan-button" type="button" data-run-scan>Run New Scan</button>
+      </section>
+      <section class="detection-layout">
+        <article class="detection-upload-panel">
+          <h2>Crop Image Intake</h2>
+          <div class="upload-zone" data-upload-zone tabindex="0"><span class="upload-icon" aria-hidden="true"></span><strong>Drop leaf image here</strong><p>JPG, PNG, or drone frame. Backend upload can bind to this zone.</p></div>
+          <div class="scan-options"><label><span>Crop type</span><select data-crop-select><option>Tomato</option><option>Maize</option><option>Pepper</option></select></label><label><span>Field zone</span><select><option>North Block</option><option>Greenhouse 2</option><option>River Plot</option></select></label></div>
+        </article>
+        <article class="detection-result-panel">
+          <div class="panel-heading"><h2>Latest AI Result</h2><span data-result-status>Ready</span></div>
+          <div class="confidence-ring" data-confidence-ring><strong>94%</strong><span>confidence</span></div>
+          <dl class="result-list"><div><dt>Disease</dt><dd>Early Blight</dd></div><div><dt>Severity</dt><dd>Medium</dd></div><div><dt>Recommendation</dt><dd>Isolate zone and apply targeted fungicide.</dd></div></dl>
+        </article>
+        <article class="detection-table-panel">
+          <div class="panel-heading"><h2>Recent Detections</h2><button type="button" data-filter-critical>Show Critical</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Crop</th><th>Field</th><th>Disease</th><th>Confidence</th><th>Status</th></tr></thead><tbody data-detection-table></tbody></table></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div class="toast-region" aria-live="polite" aria-atomic="true" data-toast-region></div>
+</body>
+</html>

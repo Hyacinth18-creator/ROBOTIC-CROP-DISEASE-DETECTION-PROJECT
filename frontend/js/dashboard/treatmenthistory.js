@@ -1,28 +1,27 @@
+const treatments = [
+  ["Copper Spray", "Tomato", "North Block", "12-Jun-26", "Monitoring"],
+  ["Bio Fungicide", "Maize", "River Plot", "10-Jun-26", "Complete"],
+  ["Neem Extract", "Pepper", "Greenhouse 2", "08-Jun-26", "Complete"],
+];
+
 document.addEventListener("DOMContentLoaded", () => {
   initShell();
-
-  document.querySelector("[data-run-route]")?.addEventListener("click", () => {
-    document.querySelector("[data-robot-marker]")?.classList.toggle("is-running");
-    prependLog("Simulation route started.");
-    showToast("Farm simulation is running.");
+  renderTreatments(treatments);
+  document.querySelector("[data-add-treatment]")?.addEventListener("click", () => {
+    treatments.unshift(["Targeted Fungicide", "Tomato", "South Row", "Today", "Monitoring"]);
+    renderTreatments(treatments);
+    showToast("Treatment record added.");
   });
-
-  document.querySelector("[data-optimize-route]")?.addEventListener("click", () => {
-    prependLog("Route optimized for disease hotspot coverage.");
-    showToast("Route optimized for 91% field coverage.");
-  });
-
-  document.querySelector("[data-coverage-range]")?.addEventListener("input", (event) => {
-    document.querySelector("[data-coverage-value]").textContent = `${event.target.value}%`;
+  document.querySelector("[data-treatment-filter]")?.addEventListener("change", (event) => {
+    const value = event.target.value;
+    renderTreatments(value === "all" ? treatments : treatments.filter((row) => row[4].toLowerCase() === value));
   });
 });
 
-function prependLog(message) {
-  const log = document.querySelector("[data-run-log]");
-  if (!log) return;
-  const item = document.createElement("li");
-  item.textContent = message;
-  log.prepend(item);
+function renderTreatments(rows) {
+  const table = document.querySelector("[data-treatment-table]");
+  if (!table) return;
+  table.innerHTML = rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("");
 }
 
 function initShell() {
@@ -47,11 +46,9 @@ function bindShellEvents() {
   document.querySelector("[data-sidebar-toggle]")?.addEventListener("click", toggleSidebar);
   document.querySelector("[data-search-form]")?.addEventListener("submit", (event) => {
     event.preventDefault();
-    showToast("Simulation search is ready for backend route filtering.");
+    showToast("Treatment search is ready for backend filtering.");
   });
-  document.querySelectorAll("[data-toast]").forEach((button) => {
-    button.addEventListener("click", () => showToast(button.dataset.toast));
-  });
+  document.querySelectorAll("[data-toast]").forEach((button) => button.addEventListener("click", () => showToast(button.dataset.toast)));
 }
 
 function toggleSidebar() {

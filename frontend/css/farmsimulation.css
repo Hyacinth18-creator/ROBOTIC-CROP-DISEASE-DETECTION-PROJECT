@@ -1,0 +1,177 @@
+.page-hero,
+.field-sim-panel,
+.route-control-panel,
+.simulation-metrics,
+.simulation-log {
+  border: 1px solid var(--dashboard-border);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.page-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+}
+
+.page-kicker {
+  margin: 0 0 0.35rem;
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.page-hero h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.45rem);
+}
+
+.page-hero p {
+  max-width: 44rem;
+  margin: 0.45rem 0 0;
+  color: var(--dashboard-muted);
+  line-height: 1.65;
+}
+
+.run-route-button,
+.route-control-panel button {
+  width: fit-content;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #0f766e;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  padding: 0.75rem 1rem;
+}
+
+.simulation-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.field-sim-panel,
+.route-control-panel,
+.simulation-metrics,
+.simulation-log {
+  padding: 1rem;
+}
+
+.simulation-grid h2 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.sim-map {
+  position: relative;
+  min-height: 24rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, rgb(15 118 110 / 0.16) 1px, transparent 1px),
+    linear-gradient(0deg, rgb(15 118 110 / 0.16) 1px, transparent 1px),
+    #eef8f4;
+  background-size: 42px 42px;
+}
+
+.sim-map::before {
+  position: absolute;
+  inset: 18% 12%;
+  border: 3px dashed #0f766e;
+  border-radius: 999px;
+  content: "";
+  transform: rotate(-18deg);
+}
+
+.route-node,
+.robot-marker {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #0f766e;
+}
+
+.node-one { left: 16%; top: 26%; }
+.node-two { right: 22%; top: 34%; }
+.node-three { left: 42%; bottom: 21%; }
+
+.robot-marker {
+  left: 18%;
+  top: 70%;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #f59e0b;
+  transition: left 600ms ease, top 600ms ease;
+}
+
+.robot-marker.is-running {
+  left: 72%;
+  top: 28%;
+}
+
+.route-control-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.route-control-panel label {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--dashboard-ink);
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.simulation-metrics dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.simulation-metrics div,
+.simulation-log li {
+  border-radius: 0.45rem;
+  background: #f8fbf9;
+  padding: 0.75rem;
+}
+
+.simulation-metrics dt {
+  color: var(--dashboard-muted);
+  font-size: 0.75rem;
+}
+
+.simulation-metrics dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.simulation-log ol {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+@media (min-width: 800px) {
+  .page-hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .simulation-grid {
+    grid-template-columns: 1.4fr 0.8fr;
+  }
+
+  .field-sim-panel {
+    grid-row: span 3;
+  }
+}

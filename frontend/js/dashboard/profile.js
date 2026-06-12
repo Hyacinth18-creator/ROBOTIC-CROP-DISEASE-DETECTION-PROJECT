@@ -1,29 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   initShell();
-
-  document.querySelector("[data-run-route]")?.addEventListener("click", () => {
-    document.querySelector("[data-robot-marker]")?.classList.toggle("is-running");
-    prependLog("Simulation route started.");
-    showToast("Farm simulation is running.");
-  });
-
-  document.querySelector("[data-optimize-route]")?.addEventListener("click", () => {
-    prependLog("Route optimized for disease hotspot coverage.");
-    showToast("Route optimized for 91% field coverage.");
-  });
-
-  document.querySelector("[data-coverage-range]")?.addEventListener("input", (event) => {
-    document.querySelector("[data-coverage-value]").textContent = `${event.target.value}%`;
+  document.querySelector("[data-save-profile]")?.addEventListener("click", () => showToast("Profile saved."));
+  document.querySelector("[data-profile-form]")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    showToast("Profile form is ready for backend submission.");
   });
 });
-
-function prependLog(message) {
-  const log = document.querySelector("[data-run-log]");
-  if (!log) return;
-  const item = document.createElement("li");
-  item.textContent = message;
-  log.prepend(item);
-}
 
 function initShell() {
   renderMobileNav();
@@ -47,11 +29,9 @@ function bindShellEvents() {
   document.querySelector("[data-sidebar-toggle]")?.addEventListener("click", toggleSidebar);
   document.querySelector("[data-search-form]")?.addEventListener("submit", (event) => {
     event.preventDefault();
-    showToast("Simulation search is ready for backend route filtering.");
+    showToast("Profile search is ready for backend filtering.");
   });
-  document.querySelectorAll("[data-toast]").forEach((button) => {
-    button.addEventListener("click", () => showToast(button.dataset.toast));
-  });
+  document.querySelectorAll("[data-toast]").forEach((button) => button.addEventListener("click", () => showToast(button.dataset.toast)));
 }
 
 function toggleSidebar() {
