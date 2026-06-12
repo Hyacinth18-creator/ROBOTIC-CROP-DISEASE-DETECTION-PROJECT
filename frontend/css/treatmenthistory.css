@@ -2,10 +2,16 @@
 .treatment-summary,
 .treatment-log-panel,
 .treatment-timeline {
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid var(--dashboard-border);
   border-radius: 0.5rem;
   background: #ffffff;
   box-shadow: var(--dashboard-shadow);
+}
+
+.treatment-main {
+  padding-bottom: 2rem;
 }
 
 .page-hero {
@@ -26,14 +32,19 @@
 
 .page-hero h1 {
   margin: 0;
-  font-size: clamp(1.7rem, 4vw, 2.45rem);
+  color: var(--dashboard-ink);
+  font-size: clamp(1.45rem, 8vw, 2.2rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .page-hero p {
   max-width: 44rem;
   margin: 0.45rem 0 0;
   color: var(--dashboard-muted);
+  font-size: 0.86rem;
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .record-button,
@@ -44,7 +55,7 @@
 }
 
 .record-button {
-  width: fit-content;
+  width: 100%;
   border: 0;
   background: #ea580c;
   color: #ffffff;
@@ -54,8 +65,11 @@
 
 .treatment-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   margin-top: 1rem;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .treatment-summary,
@@ -71,34 +85,42 @@
 
 .effectiveness-meter {
   display: grid;
-  min-height: 13rem;
+  min-height: 10.5rem;
   place-items: center;
   border-radius: 0.5rem;
   background: conic-gradient(#ea580c 0 88%, #f2eee9 88% 100%);
   color: var(--dashboard-ink);
+  text-align: center;
 }
 
 .effectiveness-meter strong {
-  font-size: 2.4rem;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .effectiveness-meter span {
   color: var(--dashboard-muted);
+  font-size: 0.78rem;
   font-weight: 800;
 }
 
 .panel-heading {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 .treatment-log-panel select {
+  width: 100%;
   min-height: 2.4rem;
   border: 1px solid var(--dashboard-border);
   background: #ffffff;
   padding: 0 0.7rem;
+}
+
+.treatment-log-panel .table-wrap table {
+  min-width: 34rem;
 }
 
 .treatment-timeline ol {
@@ -122,8 +144,30 @@
     justify-content: space-between;
   }
 
+  .record-button {
+    width: fit-content;
+  }
+
   .treatment-grid {
     grid-template-columns: 0.75fr 1.35fr;
+  }
+
+  .effectiveness-meter {
+    min-height: 13rem;
+  }
+
+  .effectiveness-meter strong {
+    font-size: 2.4rem;
+  }
+
+  .panel-heading {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .treatment-log-panel select {
+    width: auto;
   }
 
   .treatment-timeline {
