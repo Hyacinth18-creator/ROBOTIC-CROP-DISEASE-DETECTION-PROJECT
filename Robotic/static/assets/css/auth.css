@@ -1,0 +1,39 @@
+.auth-shell {
+  background: #f6f8f4;
+}
+
+.auth-panel {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgb(15 23 42 / 0.10);
+}
+
+.auth-aside {
+  border-radius: 0.5rem;
+  border: 1px solid #d9e5dc;
+  background: #edf5ec;
+  overflow: hidden;
+}
+
+.auth-visual-image {
+  display: block;
+  height: 14rem;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.auth-visual-copy {
+  padding: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .auth-visual-image {
+    height: 21rem;
+  }
+
+  .auth-visual-copy {
+    padding: 2rem;
+  }
+}
