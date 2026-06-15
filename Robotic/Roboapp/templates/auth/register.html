@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{% load static %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Create a SmartAI account for crop disease detection, farm simulation, and precision treatment support.">
   <title>Register | SmartAI</title>
+  {% load static %}
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/auth.css' %}">
-  <script src="{% static 'assets/js/common/config.js' %}" defer></script>
-  <script src="{% static 'assets/js/common/api.js' %}" defer></script>
-  <script src="{% static 'assets/js/common/utils.js' %}" defer></script>
-  <script src="{% static 'assets/js/auth/register.js' %}" defer></script>
-  <script>
-    window.registerRedirect = {
-      url: "{{ auto_redirect_url|default:'' }}",
-      delay: {{ auto_redirect_delay|default:0 }},
-    };
-  </script>
+  <link rel="stylesheet" href="{% static 'assets/images/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/images/css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/images/css/chatbot.css' %}">
+  <script src="{% static 'assets/images/js/common/config.js' %}" defer></script>
+  <script src="{% static 'assets/images/js/common/api.js' %}" defer></script>
+  <script src="{% static 'assets/images/js/common/utils.js' %}" defer></script>
+  <script src="{% static 'assets/images/js/auth/register.js' %}" defer></script>
+  <script src="{% static 'assets/images/js/common/chatbot.js' %}" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  {% include 'auth/navbar.html' %}
 
   <main id="main-content" class="auth-shell">
     <section class="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8">
       <aside class="auth-aside text-[#18372a]">
-        <!-- Register image supports onboarding without hiding the product context on small screens. -->
         <img class="auth-visual-image" src="{% static 'assets/images/register.jpg' %}" alt="Farmer reviewing crops for precision agriculture decisions" width="736" height="736">
         <div class="auth-visual-copy">
           <p class="text-sm font-bold uppercase tracking-wide text-green-700">Join SmartAI</p>
@@ -37,7 +31,7 @@
       </aside>
 
       <section class="auth-panel mx-auto w-full max-w-xl p-6 sm:p-8" aria-labelledby="register-title">
-        <a class="btn btn-secondary mb-6 w-fit" href="/">
+        <a class="btn btn-secondary mb-6 w-fit" href="/index/">
           <span aria-hidden="true">&larr;</span>
           Back to home
         </a>
@@ -45,30 +39,11 @@
         <h2 id="register-title" class="mt-3 text-3xl font-black text-slate-950">Register for SmartAI</h2>
         <p class="mt-3 text-sm leading-6 text-slate-600">KickStart your journey with SmartAI.</p>
 
-        <form class="mt-8 space-y-5" data-register-form method="post" action="{% url 'register' %}">
+        <form class="mt-8 space-y-5" method="post" action="" novalidate>
           {% csrf_token %}
-          {% if messages %}
-          <div class="space-y-3">
-            {% for message in messages %}
-            <p class="form-message{% if message.tags %} {{ message.tags }}{% endif %}"{% if message.tags %} data-state="{{ message.tags }}"{% endif %} aria-live="polite">{{ message }}</p>
-            {% endfor %}
-          </div>
-          {% endif %}
           <div>
             <label class="field-label" for="username">Username</label>
             <input class="field-input" id="username" name="username" type="text" autocomplete="username" required>
-          </div>
-          <div>
-            <label class="field-label" for="full_name">Full name</label>
-            <input class="field-input" id="full_name" name="full_name" type="text" autocomplete="name" required>
-          </div>
-          <div>
-            <label class="field-label" for="email">Email</label>
-            <input class="field-input" id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div>
-            <label class="field-label" for="phone">Phone Number</label>
-            <input class="field-input" id="phone" name="phone" type="tel" autocomplete="tel" required>
           </div>
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
@@ -76,10 +51,17 @@
               <input class="field-input" id="password" name="password" type="password" autocomplete="new-password" minlength="8" required>
             </div>
             <div>
-              <label class="field-label" for="confirm_password">Confirm Password</label>
-              <input class="field-input" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required>
+              <label class="field-label" for="confirmPassword">Confirm Password</label>
+              <input class="field-input" id="confirmPassword" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required>
             </div>
           </div>
+          {% if messages %}
+            {% for message in messages %}
+              <p class="form-message" aria-live="polite">{{ message }}</p>
+            {% endfor %}
+          {% else %}
+            <p class="form-message" aria-live="polite"></p>
+          {% endif %}
           <button class="btn btn-primary w-full" type="submit">Create account</button>
         </form>
 
@@ -88,6 +70,26 @@
           <a class="font-bold text-green-700 hover:text-green-800" href="/login/">Login</a>
         </p>
       </section>
+
+      <!-- Chatbot Widget -->
+      <div id="chatbot-widget" class="chatbot-widget">
+        <div id="chatbot-header" class="chatbot-header">
+          <span>Chat with us</span>
+          <button id="close-chatbot" class="chatbot-close-btn" type="button">&times;</button>
+        </div>
+        <div id="chatbot-body" class="chatbot-body">
+          <div id="chatbot-messages" class="chatbot-messages"></div>
+          <div class="chatbot-input-container">
+            <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type a message..." />
+            <button id="chatbot-send" class="chatbot-send-btn" type="button">Send</button>
+          </div>
+        </div>
+        <button id="chatbot-toggle" class="chatbot-toggle-btn" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </button>
+      </div>
     </section>
   </main>
 </body>

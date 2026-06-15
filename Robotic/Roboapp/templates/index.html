@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{% load static %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="SmartAI detects crop diseases early, supports field monitoring simulation, and improves precision treatment decisions using artificial intelligence.">
   <title>SmartAI | AI-Powered Crop Disease Detection</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/landing.css' %}">
-  <script src="{% static 'assets/js/common/config.js' %}" defer></script>
-  <script src="{% static 'assets/js/common/api.js' %}" defer></script>
-  <script src="{% static 'assets/js/common/utils.js' %}" defer></script>
+    {% load static %}
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <script src="{% static 'js/common/config.js' %}" defer></script>
+  <script src="{% static 'js/common/api.js' %}" defer></script>
+  <script src="{% static 'js/common/utils.js' %}" defer></script>
 </head>
 <body data-page="landing">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header sticky top-0 z-50 border-b border-slate-200 bg-white" data-site-header>
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8" aria-label="Primary navigation">
-      <a href="/" class="brand-link flex items-center gap-3 text-slate-950" aria-label="SmartAI home">
+      <a href="../landing/index.html" class="brand-link flex items-center gap-3 text-slate-950" aria-label="SmartAI home">
         <span class="brand-mark grid h-10 w-10 place-items-center rounded-lg bg-green-600 text-sm font-black text-white">SA</span>
         <span class="brand-copy leading-tight">
           <span class="block text-base font-bold">SmartAI</span>
@@ -42,13 +42,56 @@
           <a class="nav-link" href="#features">Features</a>
           <a class="nav-link" href="#how-it-works">How It Works</a>
           <div class="flex flex-col gap-3 pt-2 lg:flex-row lg:pt-0">
-            <a class="nav-login btn btn-secondary" href="/login/">Login</a>
-            <a class="nav-cta btn btn-primary" href="/">Get Started</a>
+            <a class="nav-login btn btn-secondary" href="../auth/login.html">Login</a>
+            <a class="nav-cta btn btn-primary" href="../auth/register.html">Get Started</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
+
+  <!-- Chatbot Widget -->
+  <div id="chatbot-widget" class="chatbot-widget" aria-label="SmartAI assistant" aria-live="polite">
+    <div id="chatbot-header" class="chatbot-header" role="button" tabindex="0" aria-expanded="true" aria-controls="chatbot-body">
+      <div class="chatbot-header-copy">
+        <span class="chatbot-avatar" aria-hidden="true">SA</span>
+        <div>
+          <p class="chatbot-title">SmartAI Assistant</p>
+          <p class="chatbot-status">Online now</p>
+        </div>
+      </div>
+      <button id="close-chatbot" class="chatbot-close-btn" type="button" aria-label="Close chat">&times;</button>
+    </div>
+    <div id="chatbot-body" class="chatbot-body">
+      <div class="chatbot-hero">
+        <p class="chatbot-hero-kicker">Quick help for crop care</p>
+        <h3>Ask about disease detection, monitoring, or treatment ideas.</h3>
+        <p>Use quick prompts or type your own message. The assistant responds in a friendly, guided flow.</p>
+        <div class="chatbot-chips" id="chatbot-chips">
+          <button class="chatbot-chip" type="button" data-chat-prompt="How do I detect crop diseases early?">Early detection</button>
+          <button class="chatbot-chip" type="button" data-chat-prompt="What should I do after a crop disease is detected?">Treatment steps</button>
+          <button class="chatbot-chip" type="button" data-chat-prompt="How can robot monitoring help my farm?">Robot monitoring</button>
+        </div>
+      </div>
+      <div id="chatbot-messages" class="chatbot-messages"></div>
+      <div class="chatbot-typing" id="chatbot-typing" hidden>
+        <span></span><span></span><span></span>
+      </div>
+      <div class="chatbot-input-shell">
+        <label class="sr-only" for="chatbot-input">Type a message</label>
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask SmartAI anything..." autocomplete="off" />
+        <button id="chatbot-send" class="chatbot-send-btn" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+  <button id="chatbot-toggle" class="chatbot-toggle-btn" type="button" aria-label="Open chat assistant">
+    <span class="chatbot-toggle-glow" aria-hidden="true"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  </button>
+  <link rel="stylesheet" href="{% static 'assets/images/css/chatbot.css' %}">
+  <script src="{% static 'assets/images/js/common/chatbot.js' %}" defer></script>
 
   <main id="main-content">
     <!-- Hero section introduces the product and primary conversion actions. -->
@@ -63,7 +106,7 @@
             Detect crop diseases early, simulate autonomous field monitoring, and optimize treatment decisions using artificial intelligence.
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a class="btn btn-primary" href="/">Start monitoring crops</a>
+            <a class="btn btn-primary" href="../auth/register.html">Start monitoring crops</a>
             <a class="btn btn-secondary" href="#features">Explore features</a>
           </div>
           <dl class="mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-3">
@@ -192,7 +235,7 @@
           <h2 class="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Start with early detection. Grow into precision automation.</h2>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row">
-          <a class="btn btn-primary" href="/">Create account</a>
+          <a class="btn btn-primary" href="../auth/register.html">Create account</a>
           <a class="btn border-[#b7cdbc] bg-white text-[#18372a] hover:border-green-600 hover:text-green-700" href="#about">Learn more</a>
         </div>
       </div>

@@ -6,10 +6,6 @@
   --smartai-earth: #f6f8f4;
   --smartai-ink: #0f172a;
   --smartai-light: #f1f5f9;
-  --smartai-ginger: #c96a10;
-  --smartai-ginger-dark: #a7550c;
-  --smartai-ginger-soft: #fff2e3;
-  --smartai-ginger-border: #f0be86;
 }
 
 html {
@@ -51,26 +47,14 @@ body.menu-open {
 }
 
 .nav-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  border: 1px solid rgb(201 106 16 / 0.14);
-  border-radius: 9999px;
-  background: rgb(255 255 255 / 0.72);
-  padding: 0.45rem 0.9rem;
-  color: var(--smartai-ginger-dark);
+  color: #334155;
   font-size: 0.9375rem;
   font-weight: 600;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: color 160ms ease;
 }
 
 .nav-link:hover {
-  border-color: var(--smartai-ginger-border);
-  background: var(--smartai-ginger-soft);
-  color: var(--smartai-ginger);
-  box-shadow: 0 12px 26px rgb(201 106 16 / 0.12);
-  transform: translateY(-1px);
+  color: var(--smartai-green-dark);
 }
 
 .site-header {
@@ -95,14 +79,6 @@ body.menu-open {
   color: #18372a;
 }
 
-.site-header.is-landing-nav .nav-link {
-  background: rgb(255 255 255 / 0.82);
-}
-
-.site-header.is-landing-nav .nav-link:hover {
-  color: var(--smartai-ginger);
-}
-
 .site-header.is-scrolled .brand-link,
 .site-header.is-scrolled .brand-subtitle,
 .site-header.is-scrolled .nav-link,
@@ -119,17 +95,8 @@ body.menu-open {
   background: #10bfae;
 }
 
-.site-header.is-scrolled .nav-link,
-.site-header.is-menu-open .nav-link {
-  border-color: rgb(255 255 255 / 0.14);
-  background: rgb(255 255 255 / 0.08);
-  color: #fff4e6;
-}
-
 .site-header.is-scrolled .nav-link:hover,
 .site-header.is-menu-open .nav-link:hover {
-  border-color: rgb(255 255 255 / 0.28);
-  background: rgb(255 255 255 / 0.16);
   color: #ffffff;
 }
 

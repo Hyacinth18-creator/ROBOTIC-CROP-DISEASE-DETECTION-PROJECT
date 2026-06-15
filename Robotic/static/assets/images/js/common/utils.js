@@ -28,8 +28,6 @@ window.SmartAIUtils = {
     const openIcon = document.querySelector("[data-menu-open-icon]");
     const closeIcon = document.querySelector("[data-menu-close-icon]");
     const label = document.querySelector("[data-menu-label]");
-    const landingPath = "/";
-    const sectionLinks = menu?.querySelectorAll('a[href*="#problem"], a[href*="#solution"], a[href*="#features"], a[href*="#how-it-works"]');
 
     this.bindLandingHeader(header);
 
@@ -64,45 +62,6 @@ window.SmartAIUtils = {
 
         if (label) {
           label.textContent = "Open navigation menu";
-        }
-      });
-    });
-
-    sectionLinks?.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        const targetHref = link.getAttribute("href") || "";
-        const targetId = targetHref.split("#")[1];
-
-        if (!targetId) {
-          return;
-        }
-
-        const targetElement = document.getElementById(targetId);
-        const isLandingPage = document.body.dataset.page === "landing";
-
-        if (toggle && menu) {
-          toggle.setAttribute("aria-expanded", "false");
-          menu.classList.add("hidden");
-          document.body.classList.remove("menu-open");
-          header?.classList.remove("is-menu-open");
-          openIcon?.classList.remove("hidden");
-          closeIcon?.classList.add("hidden");
-
-          if (label) {
-            label.textContent = "Open navigation menu";
-          }
-        }
-
-        if (isLandingPage && targetElement) {
-          event.preventDefault();
-          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-          history.replaceState(null, "", `#${targetId}`);
-          return;
-        }
-
-        if (!isLandingPage) {
-          event.preventDefault();
-          window.location.href = `${landingPath}#${targetId}`;
         }
       });
     });
