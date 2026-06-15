@@ -1,0 +1,310 @@
+:root {
+  --smartai-green: #16a34a;
+  --smartai-green-dark: #15803d;
+  --smartai-forest: #18372a;
+  --smartai-forest-soft: #254c3a;
+  --smartai-earth: #f6f8f4;
+  --smartai-ink: #0f172a;
+  --smartai-light: #f1f5f9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--smartai-ink);
+  background: var(--smartai-earth);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border-radius: 0.375rem;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  color: var(--smartai-ink);
+  font-weight: 700;
+  box-shadow: 0 20px 40px rgb(15 23 42 / 0.18);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: none;
+}
+
+.nav-link {
+  color: #334155;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: color 160ms ease;
+}
+
+.nav-link:hover {
+  color: var(--smartai-green-dark);
+}
+
+.site-header {
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.site-header.is-landing-nav {
+  border-color: transparent;
+  background: transparent;
+}
+
+.site-header.is-scrolled,
+.site-header.is-menu-open {
+  border-color: rgb(255 255 255 / 0.12);
+  background: #24458f;
+  box-shadow: 0 12px 28px rgb(15 23 42 / 0.18);
+}
+
+.site-header.is-landing-nav .brand-link,
+.site-header.is-landing-nav .nav-link,
+.site-header.is-landing-nav .menu-toggle {
+  color: #18372a;
+}
+
+.site-header.is-scrolled .brand-link,
+.site-header.is-scrolled .brand-subtitle,
+.site-header.is-scrolled .nav-link,
+.site-header.is-scrolled .menu-toggle,
+.site-header.is-menu-open .brand-link,
+.site-header.is-menu-open .brand-subtitle,
+.site-header.is-menu-open .nav-link,
+.site-header.is-menu-open .menu-toggle {
+  color: #eef6ff;
+}
+
+.site-header.is-scrolled .brand-mark,
+.site-header.is-menu-open .brand-mark {
+  background: #10bfae;
+}
+
+.site-header.is-scrolled .nav-link:hover,
+.site-header.is-menu-open .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header.is-scrolled .nav-login,
+.site-header.is-menu-open .nav-login {
+  border-color: rgb(255 255 255 / 0.26);
+  background: transparent;
+  color: #eef6ff;
+}
+
+.site-header.is-scrolled .nav-cta,
+.site-header.is-menu-open .nav-cta {
+  border-color: #10bfae;
+  background: #10bfae;
+}
+
+.site-header.is-menu-open .mobile-menu {
+  border-color: rgb(255 255 255 / 0.12);
+  background: #24458f;
+}
+
+@media (min-width: 1024px) {
+  .site-header.is-landing-nav:not(.is-scrolled) .nav-login {
+    border-color: transparent;
+    background: transparent;
+    color: #18372a;
+  }
+}
+
+.footer-link {
+  transition: color 160ms ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-primary {
+  border: 1px solid var(--smartai-green);
+  background: var(--smartai-green);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  border-color: var(--smartai-green-dark);
+  background: var(--smartai-green-dark);
+}
+
+.btn-secondary {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  border-color: var(--smartai-green);
+  color: var(--smartai-green-dark);
+}
+
+.section-eyebrow {
+  color: var(--smartai-green-dark);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.field-label {
+  display: block;
+  color: #1e293b;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.field-input {
+  margin-top: 0.5rem;
+  min-height: 3rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 0.75rem 0.875rem;
+  color: #0f172a;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field-input:focus {
+  border-color: #cbd5e1;
+  box-shadow: none;
+  outline: none;
+}
+
+.form-message {
+  min-height: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-message[data-state="error"] {
+  color: #b91c1c;
+}
+
+.form-message[data-state="success"] {
+  color: var(--smartai-green-dark);
+}
+
+.app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  background: rgb(15 23 42 / 0.42);
+  backdrop-filter: blur(14px);
+}
+
+.app-loader[hidden] {
+  display: none;
+}
+
+.app-loader-panel {
+  display: grid;
+  width: min(28rem, calc(100vw - 2rem));
+  justify-items: center;
+  border: 1px solid rgb(255 255 255 / 0.72);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0 28px 70px rgb(15 23 42 / 0.22);
+  text-align: center;
+}
+
+.app-loader-mark {
+  position: relative;
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #eaf8ee;
+  color: var(--smartai-green);
+}
+
+.app-loader-mark::before,
+.app-loader-mark::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+}
+
+.app-loader-mark::before {
+  inset: 0;
+  border: 0.28rem solid rgb(22 163 74 / 0.16);
+  border-top-color: var(--smartai-green);
+  animation: smartai-spin 900ms linear infinite;
+}
+
+.app-loader-mark::after {
+  width: 1.35rem;
+  height: 1.35rem;
+  background: currentColor;
+  clip-path: ellipse(38% 50% at 50% 50%);
+  transform: rotate(35deg);
+}
+
+.app-loader-title {
+  margin: 1.2rem 0 0;
+  color: var(--smartai-ink);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.app-loader-copy {
+  max-width: 22rem;
+  margin: 0.55rem 0 0;
+  color: #475569;
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+@keyframes smartai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1024px) {
+  body.menu-open {
+    overflow: auto;
+  }
+}

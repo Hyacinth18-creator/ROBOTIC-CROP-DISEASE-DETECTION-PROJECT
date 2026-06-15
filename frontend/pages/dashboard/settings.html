@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartAI settings for detection thresholds, alerts, integrations, and dashboard preferences.">
+  <title>SmartAI | Settings</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/dashboard.css">
+  <link rel="stylesheet" href="../../css/settings.css">
+  <link rel="stylesheet" href="../../css/chatbot.css">
+  <script src="../../js/dashboard/notifications.js" defer></script>
+  <script src="../../js/dashboard/profile-menu.js" defer></script>
+  <script src="../../js/dashboard/settings.js" defer></script>
+  <script src="../../js/common/chatbot.js"></script>
+</head>
+<body class="dashboard-body" data-page="settings">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="SmartAI dashboard navigation"><div class="sidebar-brand-row"><a class="dashboard-brand" href="../landing/index.html" aria-label="SmartAI home"><span class="dashboard-brand-mark" aria-hidden="true">SA</span><span><span class="dashboard-brand-name">SmartAI</span><span class="dashboard-brand-subtitle">Crop Intelligence</span></span></a><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="dashboard-sidebar"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-panel" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9 5v14M14 9l3 3-3 3"></path></svg><span class="sr-only" data-sidebar-toggle-label>Close sidebar</span></button></div><nav class="dashboard-nav" aria-label="Dashboard sections"><a class="dashboard-nav-link" href="dashboard.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg><span>Dashboard</span></a><a class="dashboard-nav-link" href="diseasedetection.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg><span>Disease Detection</span></a><a class="dashboard-nav-link" href="farmsimulation.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 21 12 12 21 3 12z"></path></svg><span>Farm Simulation</span></a><a class="dashboard-nav-link" href="treatmenthistory.html"><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg><span>Treatment History</span></a><a class="dashboard-nav-link" href="analytics.html"><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 20V12M12 20V5M18 20v-9"></path></svg><span>Analytics</span></a><a class="dashboard-nav-link" href="reports.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path></svg><span>Reports</span></a><a class="dashboard-nav-link" href="profile.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0z"></path></svg><span>Profile</span></a><a class="dashboard-nav-link is-active" href="settings.html"><svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 2 4 4-1-1 4 4 3-4 3 1 4-4-1-2 4-2-4-4 1 1-4-4-3 4-3-1-4 4 1z"></path></svg><span>Settings</span></a></nav><button class="dashboard-logout" type="button" data-toast="Session controls are ready for backend logout wiring."><svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 6H5v12h5M13 8l4 4-4 4M17 12H9"></path></svg><span>Log Out</span></button></aside>
+    <div class="dashboard-mobile-bar"><a class="dashboard-brand dashboard-brand-mobile" href="../landing/index.html" aria-label="SmartAI home"><span class="dashboard-brand-mark" aria-hidden="true">SA</span><span><span class="dashboard-brand-name">SmartAI</span><span class="dashboard-brand-subtitle">Crop Intelligence</span></span></a><button class="mobile-nav-toggle" type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-dashboard-nav"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-close" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"></path></svg><span class="sr-only" data-mobile-nav-label>Open dashboard navigation</span></button></div>
+    <div class="mobile-nav-panel" id="mobile-dashboard-nav" data-mobile-nav hidden><nav class="mobile-nav-list" aria-label="Mobile dashboard sections"></nav></div>
+    <main class="dashboard-main settings-main" id="main-content">
+      <header class="dashboard-topbar"><div class="topbar-left"><form class="dashboard-search" data-search-form><label class="sr-only" for="settings-search">Search settings</label><span class="search-icon" aria-hidden="true"></span><input id="settings-search" type="search" name="query" placeholder="Search settings..." autocomplete="off"></form></div><div class="topbar-actions"><button class="icon-button" type="button" data-toast="Settings saved locally for this demo." aria-label="View notifications"><svg class="notification-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 10a4 4 0 0 1 8 0v4.4l1.5 2.1h-11L8 14.4V10z"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg></button><button class="profile-button" type="button" data-toast="Profile menu is ready."><span class="profile-avatar" aria-hidden="true">AF</span><span class="profile-copy"><span class="profile-name">Albert Flores</span><span class="profile-role">AI Farm Manager</span></span><span class="chevron" aria-hidden="true"></span></button></div></header>
+      <section class="page-hero settings-hero"><div><p class="page-kicker">Platform controls</p><h1>Settings</h1><p>Configure detection sensitivity, notification channels, and data handling preferences.</p></div><button type="button" data-save-settings>Save Settings</button></section>
+      <section class="settings-grid"><article class="settings-panel"><h2>Detection Thresholds</h2><label>Minimum confidence<input type="range" min="50" max="99" value="82" data-threshold-range></label><output data-threshold-output>82%</output></article><article class="settings-panel"><h2>Alerts</h2><label class="toggle-row"><span>Critical disease alerts</span><input type="checkbox" checked data-setting-toggle></label><label class="toggle-row"><span>Treatment reminders</span><input type="checkbox" checked data-setting-toggle></label><label class="toggle-row"><span>Weekly reports</span><input type="checkbox" data-setting-toggle></label></article><article class="settings-panel"><h2>Integrations</h2><button type="button" data-toast="Drone integration settings opened.">Drone Fleet</button><button type="button" data-toast="Weather integration settings opened.">Weather Service</button><button type="button" data-toast="Robotics integration settings opened.">Robotics API</button></article></section>
+    </main>
+  </div>
+  <div class="toast-region" aria-live="polite" aria-atomic="true" data-toast-region></div>
+  <!-- Chatbot Widget -->
+  <div id="chatbot-widget" class="chatbot-widget">
+    <div id="chatbot-header" class="chatbot-header">
+      <span>Chat with us</span>
+      <button id="close-chatbot" class="chatbot-close-btn">&times;</button>
+    </div>
+    <div id="chatbot-body" class="chatbot-body">
+      <div id="chatbot-messages" class="chatbot-messages"></div>
+      <div class="chatbot-input-container">
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type a message..." />
+        <button id="chatbot-send" class="chatbot-send-btn">Send</button>
+      </div>
+    </div>
+    <button id="chatbot-toggle" class="chatbot-toggle-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    </button>
+  </div>
+</body>
+</html>
