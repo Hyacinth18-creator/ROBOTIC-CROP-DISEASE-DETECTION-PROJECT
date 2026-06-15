@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartAI dashboard for crop disease detection, crop health monitoring, treatment tracking, analytics, and farm reporting.">
+  <title>SmartAI | Crop Health Dashboard</title>
+  {% load static%}
+  <link rel="stylesheet" href="{% static '../../css/main.css'%}">
+  <link rel="stylesheet" href="{% static '../../css/dashboard.css'%}">
+  <link rel="stylesheet" href="{% static '../../css/chatbot.css'%}">
+  <script src="{% static '../../js/dashboard/notifications.js'%}" defer></script>
+  <script src="{% static '../../js/dashboard/profile-menu.js'%}" defer></script>
+  <script src="{% static '../../js/dashboard/dashboard.js'%}" defer></script>
+  <script src="{% static '../../js/common/chatbot.js'%}"></script>
+</head>
+<body class="dashboard-body" data-page="dashboard">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="SmartAI dashboard navigation">
+      <div class="sidebar-brand-row"><a class="dashboard-brand" href="../landing/index.html" aria-label="SmartAI home">
+        <span class="dashboard-brand-mark" aria-hidden="true">SA</span>
+        <span>
+          <span class="dashboard-brand-name">SmartAI</span>
+          <span class="dashboard-brand-subtitle">Crop Intelligence</span>
+        </span>
+      </a><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="dashboard-sidebar"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-panel" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9 5v14M14 9l3 3-3 3"></path></svg><span class="sr-only" data-sidebar-toggle-label>Close sidebar</span></button></div><nav class="dashboard-nav" aria-label="Dashboard sections">
+        <a class="dashboard-nav-link is-active" href="dashboard.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>
+          <span>Dashboard</span>
+        </a>
+        <a class="dashboard-nav-link" href="diseasedetection.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg>
+          <span>Disease Detection</span>
+        </a>
+        <a class="dashboard-nav-link" href="farmsimulation.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 21 12 12 21 3 12z"></path></svg>
+          <span>Farm Simulation</span>
+        </a>
+        <a class="dashboard-nav-link" href="treatmenthistory.html">
+          <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>Treatment History</span>
+        </a>
+        <a class="dashboard-nav-link" href="analytics.html">
+          <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 20V12M12 20V5M18 20v-9"></path></svg>
+          <span>Analytics</span>
+        </a>
+        <a class="dashboard-nav-link" href="reports.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path></svg>
+          <span>Reports</span>
+        </a>
+        <a class="dashboard-nav-link" href="profile.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0z"></path></svg>
+          <span>Profile</span>
+        </a>
+        <a class="dashboard-nav-link" href="settings.html">
+          <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 2 4 4-1-1 4 4 3-4 3 1 4-4-1-2 4-2-4-4 1 1-4-4-3 4-3-1-4 4 1z"></path></svg>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <button class="dashboard-logout" type="button" data-toast="Session controls are ready for backend logout wiring.">
+        <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 6H5v12h5M13 8l4 4-4 4M17 12H9"></path></svg>
+        <span>Log Out</span>
+      </button>
+    </aside>
+
+    <div class="dashboard-mobile-bar">
+      <a class="dashboard-brand dashboard-brand-mobile" href="../landing/index.html" aria-label="SmartAI home">
+        <span class="dashboard-brand-mark" aria-hidden="true">SA</span>
+        <span>
+          <span class="dashboard-brand-name">SmartAI</span>
+          <span class="dashboard-brand-subtitle">Crop Intelligence</span>
+        </span>
+      </a>
+      <button class="mobile-nav-toggle" type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-dashboard-nav">
+        <svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M5 7h14M5 12h14M5 17h14"></path>
+        </svg>
+        <svg class="menu-svg menu-svg-close" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M7 7l10 10M17 7 7 17"></path>
+        </svg>
+        <span class="sr-only" data-mobile-nav-label>Open dashboard navigation</span>
+      </button>
+    </div>
+
+    <div class="mobile-nav-panel" id="mobile-dashboard-nav" data-mobile-nav hidden>
+      <nav class="mobile-nav-list" aria-label="Mobile dashboard sections"></nav>
+    </div>
+
+    <main class="dashboard-main" id="main-content">
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <form class="dashboard-search" data-search-form>
+            <label class="sr-only" for="dashboard-search-input">Search monitoring data</label>
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="dashboard-search-input" type="search" name="query" placeholder="Search SmartAI farms..." autocomplete="off" data-search-input>
+          </form>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button" type="button" data-toast="No new disease alerts right now." aria-label="View notifications">
+            <svg class="notification-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 10a4 4 0 0 1 8 0v4.4l1.5 2.1h-11L8 14.4V10z"></path><path d="M10 19a2 2 0 0 0 4 0"></path><circle class="notification-svg-dot" cx="18" cy="6" r="3"></circle></svg>
+          </button>
+          <button class="profile-button" type="button" data-toast="Profile menu is ready for account settings.">
+            <span class="profile-avatar" aria-hidden="true">AF</span>
+            <span class="profile-copy">
+              <span class="profile-name">Albert Flores</span>
+              <span class="profile-role">AI Farm Manager</span>
+            </span>
+            <span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <section class="dashboard-title-row" aria-labelledby="dashboard-heading">
+        <div>
+          <h1 id="dashboard-heading" data-section-title>Good Morning!</h1>
+          <p data-section-description>Monitor crop disease risks and precision treatment insights.</p>
+        </div>
+        <div class="dashboard-filters">
+          <label class="filter-control">
+            <span class="sr-only">Select reporting period</span>
+            <select data-period-filter>
+              <option value="month">This Month</option>
+              <option value="week">This Week</option>
+              <option value="quarter">This Quarter</option>
+            </select>
+          </label>
+          <button class="export-button" type="button" data-export-dashboard>
+            <span class="export-icon" aria-hidden="true"></span>
+            <span>Export</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="SmartAI key performance indicators" data-kpi-grid></section>
+
+      <section class="dashboard-grid" aria-label="Crop health dashboard panels">
+        <article class="card weather-card" aria-labelledby="weather-card-title">
+          <div class="card-header">
+            <div>
+              <p class="card-kicker">On Crops</p>
+              <h2 id="weather-card-title">Monday</h2>
+            </div>
+            <div class="weather-status" aria-label="Current condition">
+              <span class="weather-sun" aria-hidden="true"></span>
+              <span>Cloudy</span>
+            </div>
+          </div>
+          <div class="weather-content">
+            <div>
+              <p class="weather-date">22 Jun 2026</p>
+              <strong>24&deg;C</strong>
+              <span>High 27&deg; Low 19&deg;</span>
+            </div>
+            <div class="weather-meter" aria-label="Field risk level">
+              <span>Risk</span>
+              <strong data-risk-label>Low</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="card chart-card health-overview-card" aria-labelledby="health-overview-title">
+          <div class="card-header">
+            <div>
+              <h2 id="health-overview-title">Crop Health Monitoring</h2>
+              <p>Live AI health distribution</p>
+            </div>
+            <label class="compact-select">
+              <span class="sr-only">Crop health view</span>
+              <select data-health-view>
+                <option value="all">All crops</option>
+                <option value="tomatoes">Tomatoes</option>
+                <option value="maize">Maize</option>
+                <option value="pepper">Pepper</option>
+              </select>
+            </label>
+          </div>
+          <div class="radial-chart-wrap" data-health-chart aria-label="Crop health radial chart"></div>
+          <div class="chart-legend" data-health-legend></div>
+        </article>
+
+        <article class="card compact-stat-card" aria-labelledby="field-area-title">
+          <div class="stat-icon stat-icon-leaf" aria-hidden="true"></div>
+          <h2 id="field-area-title">Monitored Area</h2>
+          <strong>1,200 acres</strong>
+          <span>+84 acres from last month</span>
+        </article>
+
+        <article class="card compact-stat-card" aria-labelledby="revenue-title">
+          <div class="stat-icon stat-icon-treatment" aria-hidden="true"></div>
+          <h2 id="revenue-title">Treatment Budget</h2>
+          <strong>$50,000</strong>
+          <span>-12% waste from last month</span>
+        </article>
+
+        <article class="card line-chart-card" aria-labelledby="yield-analysis-title">
+          <div class="card-header">
+            <div>
+              <h2 id="yield-analysis-title">Monthly Disease Analysis</h2>
+              <p>Detections across monitored fields</p>
+            </div>
+            <div class="segmented-control" role="group" aria-label="Disease analysis range">
+              <button class="is-active" type="button" data-chart-range="month">Month</button>
+              <button type="button" data-chart-range="year">Year</button>
+            </div>
+          </div>
+          <div class="line-chart-shell">
+            <svg class="line-chart" viewBox="0 0 640 240" role="img" aria-labelledby="line-chart-title line-chart-description" data-line-chart>
+              <title id="line-chart-title">Monthly disease detections</title>
+              <desc id="line-chart-description">Interactive line chart showing disease detections from January to September.</desc>
+            </svg>
+            <div class="chart-tooltip" data-chart-tooltip hidden></div>
+          </div>
+        </article>
+
+        <article class="card field-card" aria-labelledby="field-card-title">
+          <img src="{% static '../../assets/images/hero.jpg'%}" alt="Healthy green crop field monitored by SmartAI">
+          <div class="field-overlay">
+            <div class="card-header">
+              <div>
+                <h2 id="field-card-title">Corn Field</h2>
+                <p>Crop status: <strong>Good</strong></p>
+              </div>
+              <button class="ghost-button" type="button" data-toast="Opening detailed field view.">More Details</button>
+            </div>
+            <dl class="field-stats">
+              <div>
+                <dt>Planting Date</dt>
+                <dd>16 March 2026</dd>
+              </div>
+              <div>
+                <dt>Harvest Time</dt>
+                <dd>6 Months</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card task-card" aria-labelledby="task-card-title">
+          <div class="card-header">
+            <div>
+              <h2 id="task-card-title">Task Management</h2>
+              <p>Precision treatment workflow</p>
+            </div>
+            <div class="task-actions">
+              <button class="add-task-button" type="button" data-add-task>Add New Task</button>
+              <button class="ghost-button" type="button" data-toggle-tasks>View All</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Task Name</th>
+                  <th scope="col">Assigned To</th>
+                  <th scope="col">Due Date</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody data-task-table></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card summary-card" aria-labelledby="summary-card-title">
+          <div class="card-header">
+            <div>
+              <h2 id="summary-card-title">Vegetable Health Summary</h2>
+              <p>Healthy crop estimates</p>
+            </div>
+          </div>
+          <ul class="summary-list" data-summary-list></ul>
+        </article>
+      </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div id="chatbot-header" class="chatbot-header">
+        <span>Chat with us</span>
+        <button id="close-chatbot" class="chatbot-close-btn">&times;</button>
+      </div>
+      <div id="chatbot-body" class="chatbot-body">
+        <div id="chatbot-messages" class="chatbot-messages"></div>
+        <div class="chatbot-input-container">
+          <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type a message..." />
+          <button id="chatbot-send" class="chatbot-send-btn">Send</button>
+        </div>
+      </div>
+      <button id="chatbot-toggle" class="chatbot-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="toast-region" aria-live="polite" aria-atomic="true" data-toast-region></div>
+</body>
+</html>
