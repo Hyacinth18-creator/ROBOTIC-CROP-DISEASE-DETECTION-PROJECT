@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
@@ -36,21 +36,17 @@ def forgot_password(request):
 
 def login_user(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
+        # Using .get() prevents MultiValueDictKeyError if fields are missing
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
 
-        # Check if the user exists
         if user is not None:
-            # login(request, user)
             login(request, user)
             messages.success(request, "You are now logged in!")
-            # Admin
-            if user.is_superuser:
-                return redirect('/appointment')
-
-            # For Normal Users
+            
+            # FIX: Sent superuser to the main dashboard instead of non-existent /appointment
             return redirect('dashboard')
         else:
             messages.error(request, "Invalid login credentials")
@@ -58,32 +54,30 @@ def login_user(request):
     return render(request, 'auth/login.html')
 
 def register(request):
-    """ Show the registration form """
+    """ Handles account creation processing """
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
 
-        # Check the password
-        if password == confirm_password:
-            
-            if User.objects.filter(username=username).exists():
-                   # Display a message if the above fails
-                  messages.error(request, "Username already exist")
-            
-            else:
-                user = User.objects.create_user(username=username, password=password)
-                user.save()
-
-                # Display a message
-                messages.success(request, "Account created successfully")
-                return redirect('/login/')
-            
-    
-        else:
-            # Display a message saying passwords don't match
+        # 1. Validate password match
+        if password != confirm_password:
             messages.error(request, "Passwords do not match")
+            return render(request, 'auth/register.html')
+            
+        # 2. Validate user uniqueness
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists")
+            return render(request, 'auth/register.html')
+            
+        # 3. Securely build and save user profile
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
 
+        messages.success(request, "Account created successfully! Please log in.")
+        # FIX: Explicitly target the named URL route pattern
+        return redirect('login')
+            
     return render(request, 'auth/register.html')
 
 def logout_user(request):
