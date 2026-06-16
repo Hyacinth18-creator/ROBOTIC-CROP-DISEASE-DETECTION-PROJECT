@@ -1,4 +1,4 @@
-// Handles registration validation and backend-ready submission.
+// Handles registration validation and backend submission.
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("[data-register-form]");
   const message = document.querySelector("[data-form-message]");
@@ -12,18 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const data = window.SmartAIUtils.getFormData(form);
 
-    if (!data.fullName || data.fullName.trim().length < 3) {
-      window.SmartAIUtils.setMessage(message, "Enter your full name.", "error");
+    // Validation
+    if (!data.username || data.username.trim().length < 3) {
+      window.SmartAIUtils.setMessage(message, "Username must be at least 3 characters long.", "error");
       return;
     }
 
     if (!window.SmartAIUtils.isEmail(data.email || "")) {
       window.SmartAIUtils.setMessage(message, "Enter a valid email address.", "error");
-      return;
-    }
-
-    if (!data.phone || data.phone.trim().length < 7) {
-      window.SmartAIUtils.setMessage(message, "Enter a valid phone number.", "error");
       return;
     }
 
@@ -39,11 +35,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       window.SmartAIUtils.setMessage(message, "Creating your account...", "");
-      await window.SmartAIApi.register(data);
-      window.SmartAIUtils.setMessage(message, "Account created. You can now sign in.", "success");
+      
+      const response = await window.SmartAIApi.register({
+        username: data.username,
+        email: data.email,
+        password: data.password
+      });
+      
+      window.SmartAIUtils.setMessage(message, "Account created successfully! Redirecting to login...", "success");
       form.reset();
+      
+      window.setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
     } catch (error) {
-      window.SmartAIUtils.setMessage(message, error.message, "error");
+      window.SmartAIUtils.setMessage(message, error.message || "Error creating account. Please try again.", "error");
     }
   });
 });
