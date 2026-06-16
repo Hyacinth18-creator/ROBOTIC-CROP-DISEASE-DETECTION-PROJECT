@@ -7,11 +7,11 @@
   <title>SmartAI | AI-Powered Crop Disease Detection</title>
     {% load static %}
     <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
-  <script src="{% static 'js/common/config.js' %}" defer></script>
-  <script src="{% static 'js/common/api.js' %}" defer></script>
-  <script src="{% static 'js/common/utils.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static '/css/main.css' %}">
+  <link rel="stylesheet" href="{% static '/css/landing.css' %}">
+  <script src="{% static '/js/common/config.js' %}" defer></script>
+  <script src="{% static '/js/common/api.js' %}" defer></script>
+  <script src="{% static '/js/common/utils.js' %}" defer></script>
 </head>
 <body data-page="landing">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -42,8 +42,8 @@
           <a class="nav-link" href="#features">Features</a>
           <a class="nav-link" href="#how-it-works">How It Works</a>
           <div class="flex flex-col gap-3 pt-2 lg:flex-row lg:pt-0">
-            <a class="nav-login btn btn-secondary" href="../auth/login.html">Login</a>
-            <a class="nav-cta btn btn-primary" href="../auth/register.html">Get Started</a>
+            <a class="nav-login btn btn-secondary" href="{% url 'login'%}">Login</a>
+            <a class="nav-cta btn btn-primary" href="{% url 'register'%}">Get Started</a>
           </div>
         </div>
       </div>
@@ -90,8 +90,8 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
     </svg>
   </button>
-  <link rel="stylesheet" href="{% static 'assets/images/css/chatbot.css' %}">
-  <script src="{% static 'assets/images/js/common/chatbot.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static '/css/chatbot.css' %}">
+  <script src="{% static '/js/common/chatbot.js' %}" defer></script>
 
   <main id="main-content">
     <!-- Hero section introduces the product and primary conversion actions. -->
@@ -106,7 +106,7 @@
             Detect crop diseases early, simulate autonomous field monitoring, and optimize treatment decisions using artificial intelligence.
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a class="btn btn-primary" href="../auth/register.html">Start monitoring crops</a>
+            <a class="btn btn-primary" href="{% url 'register'%}">Start monitoring crops</a>
             <a class="btn btn-secondary" href="#features">Explore features</a>
           </div>
           <dl class="mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-3">
@@ -127,7 +127,7 @@
 
         <figure class="hero-media" aria-label="SmartAI autonomous crop monitoring preview">
           <!-- Hero image shows the real field-monitoring context instead of a generic UI mockup. -->
-          <img src="{% static 'assets/images/hero.jpg' %}" alt="Drone and tablet interface monitoring crop health in a farm field" width="736" height="736">
+          <img src="{% static '/images/hero.jpg' %}" alt="Drone and tablet interface monitoring crop health in a farm field" width="736" height="736">
           <figcaption class="hero-insight">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -235,7 +235,7 @@
           <h2 class="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Start with early detection. Grow into precision automation.</h2>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row">
-          <a class="btn btn-primary" href="../auth/register.html">Create account</a>
+          <a class="btn btn-primary" href="{% url 'register'%}">Create account</a>
           <a class="btn border-[#b7cdbc] bg-white text-[#18372a] hover:border-green-600 hover:text-green-700" href="#about">Learn more</a>
         </div>
       </div>

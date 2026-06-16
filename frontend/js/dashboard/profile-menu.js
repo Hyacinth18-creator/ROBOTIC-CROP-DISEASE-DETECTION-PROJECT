@@ -135,7 +135,7 @@
     });
 
     window.setTimeout(() => {
-      window.location.href = "../auth/login.html";
+      window.location.href = "{% url 'logout' %}";
     }, 1600);
   }
 

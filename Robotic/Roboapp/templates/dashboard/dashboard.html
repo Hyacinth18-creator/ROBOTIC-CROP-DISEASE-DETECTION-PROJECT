@@ -6,68 +6,67 @@
   <meta name="description" content="SmartAI dashboard for crop disease detection, crop health monitoring, treatment tracking, analytics, and farm reporting.">
   <title>SmartAI | Crop Health Dashboard</title>
   {% load static%}
-  <link rel="stylesheet" href="{% static '../../css/main.css'%}">
-  <link rel="stylesheet" href="{% static '../../css/dashboard.css'%}">
-  <link rel="stylesheet" href="{% static '../../css/chatbot.css'%}">
-  <script src="{% static '../../js/dashboard/notifications.js'%}" defer></script>
-  <script src="{% static '../../js/dashboard/profile-menu.js'%}" defer></script>
-  <script src="{% static '../../js/dashboard/dashboard.js'%}" defer></script>
-  <script src="{% static '../../js/common/chatbot.js'%}"></script>
+  <link rel="stylesheet" href="{% static '/css/main.css'%}">
+  <link rel="stylesheet" href="{% static '/css/dashboard.css'%}">
+  <link rel="stylesheet" href="{% static '/css/chatbot.css'%}">
+  <script src="{% static '/js/dashboard/notifications.js'%}" defer></script>
+  <script src="{% static '/js/dashboard/profile-menu.js'%}" defer></script>
+  <script src="{% static '/js/dashboard/dashboard.js'%}" defer></script>
+  <script src="{% static '/js/common/chatbot.js'%}"></script>
 </head>
 <body class="dashboard-body" data-page="dashboard">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <div class="dashboard-shell">
     <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="SmartAI dashboard navigation">
-      <div class="sidebar-brand-row"><a class="dashboard-brand" href="../landing/index.html" aria-label="SmartAI home">
+      <div class="sidebar-brand-row"><a class="dashboard-brand" href="{%url 'index'}" aria-label="SmartAI home">
         <span class="dashboard-brand-mark" aria-hidden="true">SA</span>
         <span>
           <span class="dashboard-brand-name">SmartAI</span>
           <span class="dashboard-brand-subtitle">Crop Intelligence</span>
         </span>
-      </a><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="dashboard-sidebar"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-panel" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9 5v14M14 9l3 3-3 3"></path></svg><span class="sr-only" data-sidebar-toggle-label>Close sidebar</span></button></div><nav class="dashboard-nav" aria-label="Dashboard sections">
-        <a class="dashboard-nav-link is-active" href="dashboard.html">
+      </a><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="dashboard-sidebar"><svg class="menu-svg menu-svg-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg><svg class="menu-svg menu-svg-panel" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9 5v14M14 9l3 3-3 3"></path></svg><span class="sr-only" data-sidebar-toggle-label>Close sidebar</span></button></div>
+      <nav class="dashboard-nav" aria-label="Dashboard sections">
+        <a class="dashboard-nav-link is-active" href="{%url 'dashboard'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>
           <span>Dashboard</span>
         </a>
-        <a class="dashboard-nav-link" href="diseasedetection.html">
+        <a class="dashboard-nav-link" href="{%url 'diseasedetection'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg>
           <span>Disease Detection</span>
         </a>
-        <a class="dashboard-nav-link" href="farmsimulation.html">
+        <a class="dashboard-nav-link" href="{%url 'farmsimulation'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 21 12 12 21 3 12z"></path></svg>
           <span>Farm Simulation</span>
         </a>
-        <a class="dashboard-nav-link" href="treatmenthistory.html">
+        <a class="dashboard-nav-link" href="{%url 'treatmenthistory'%}">
           <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
           <span>Treatment History</span>
         </a>
-        <a class="dashboard-nav-link" href="analytics.html">
+        <a class="dashboard-nav-link" href="{%url 'analytics'%}">
           <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 20V12M12 20V5M18 20v-9"></path></svg>
           <span>Analytics</span>
         </a>
-        <a class="dashboard-nav-link" href="reports.html">
+        <a class="dashboard-nav-link" href="{%url 'reports'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path></svg>
           <span>Reports</span>
         </a>
-        <a class="dashboard-nav-link" href="profile.html">
+        <a class="dashboard-nav-link" href="{%url 'profile'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0z"></path></svg>
           <span>Profile</span>
         </a>
-        <a class="dashboard-nav-link" href="settings.html">
+        <a class="dashboard-nav-link" href="{%url 'settings'%}">
           <svg class="nav-svg" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 2 4 4-1-1 4 4 3-4 3 1 4-4-1-2 4-2-4-4 1 1-4-4-3 4-3-1-4 4 1z"></path></svg>
           <span>Settings</span>
         </a>
       </nav>
-
-      <button class="dashboard-logout" type="button" data-toast="Session controls are ready for backend logout wiring.">
-        <svg class="nav-svg nav-svg-stroke" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 6H5v12h5M13 8l4 4-4 4M17 12H9"></path></svg>
-        <span>Log Out</span>
-      </button>
+<a href="{% url 'logout' %}">
+    Log Out
+</a>
     </aside>
 
     <div class="dashboard-mobile-bar">
-      <a class="dashboard-brand dashboard-brand-mobile" href="../landing/index.html" aria-label="SmartAI home">
+      <a class="dashboard-brand dashboard-brand-mobile" href="{%url 'index'%}" aria-label="SmartAI home">
         <span class="dashboard-brand-mark" aria-hidden="true">SA</span>
         <span>
           <span class="dashboard-brand-name">SmartAI</span>
@@ -278,25 +277,48 @@
     </main>
 
     <!-- Chatbot Widget -->
-    <div id="chatbot-widget" class="chatbot-widget">
-      <div id="chatbot-header" class="chatbot-header">
-        <span>Chat with us</span>
-        <button id="close-chatbot" class="chatbot-close-btn">&times;</button>
-      </div>
-      <div id="chatbot-body" class="chatbot-body">
-        <div id="chatbot-messages" class="chatbot-messages"></div>
-        <div class="chatbot-input-container">
-          <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type a message..." />
-          <button id="chatbot-send" class="chatbot-send-btn">Send</button>
+      <!-- Chatbot Widget -->
+  <div id="chatbot-widget" class="chatbot-widget" aria-label="SmartAI assistant" aria-live="polite">
+    <div id="chatbot-header" class="chatbot-header" role="button" tabindex="0" aria-expanded="true" aria-controls="chatbot-body">
+      <div class="chatbot-header-copy">
+        <span class="chatbot-avatar" aria-hidden="true">SA</span>
+        <div>
+          <p class="chatbot-title">SmartAI Assistant</p>
+          <p class="chatbot-status">Online now</p>
         </div>
       </div>
-      <button id="chatbot-toggle" class="chatbot-toggle-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      </button>
+      <button id="close-chatbot" class="chatbot-close-btn" type="button" aria-label="Close chat">&times;</button>
+    </div>
+    <div id="chatbot-body" class="chatbot-body">
+      <div class="chatbot-hero">
+        <p class="chatbot-hero-kicker">Quick help for crop care</p>
+        <h3>Ask about disease detection, monitoring, or treatment ideas.</h3>
+        <p>Use quick prompts or type your own message. The assistant responds in a friendly, guided flow.</p>
+        <div class="chatbot-chips" id="chatbot-chips">
+          <button class="chatbot-chip" type="button" data-chat-prompt="How do I detect crop diseases early?">Early detection</button>
+          <button class="chatbot-chip" type="button" data-chat-prompt="What should I do after a crop disease is detected?">Treatment steps</button>
+          <button class="chatbot-chip" type="button" data-chat-prompt="How can robot monitoring help my farm?">Robot monitoring</button>
+        </div>
+      </div>
+      <div id="chatbot-messages" class="chatbot-messages"></div>
+      <div class="chatbot-typing" id="chatbot-typing" hidden>
+        <span></span><span></span><span></span>
+      </div>
+      <div class="chatbot-input-shell">
+        <label class="sr-only" for="chatbot-input">Type a message</label>
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask SmartAI anything..." autocomplete="off" />
+        <button id="chatbot-send" class="chatbot-send-btn" type="button">Send</button>
+      </div>
     </div>
   </div>
+  <button id="chatbot-toggle" class="chatbot-toggle-btn" type="button" aria-label="Open chat assistant">
+    <span class="chatbot-toggle-glow" aria-hidden="true"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 14.95 3 13.526 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  </button>
+  <link rel="stylesheet" href="{% static '/css/chatbot.css' %}">
+  <script src="{% static '/js/common/chatbot.js' %}" defer></script>
 
   <div class="toast-region" aria-live="polite" aria-atomic="true" data-toast-region></div>
 </body>

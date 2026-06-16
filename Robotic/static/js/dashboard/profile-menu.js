@@ -123,21 +123,7 @@
     lastFocusedElement?.focus();
   }
 
-  function confirmLogout() {
-    showAppLoader(
-      "Logging you out",
-      "See you next time, farmer. Your fields, insights, and SmartAI recommendations will be ready when you return."
-    );
-
-    ["smartaiSession", "smartaiUser", "authToken", "token"].forEach((key) => {
-      localStorage.removeItem(key);
-      sessionStorage.removeItem(key);
-    });
-
-    window.setTimeout(() => {
-      window.location.href = "../auth/login.html";
-    }, 1600);
-  }
+ c
 
   function getLogoutModal() {
     const existingModal = document.querySelector("[data-logout-modal]");
