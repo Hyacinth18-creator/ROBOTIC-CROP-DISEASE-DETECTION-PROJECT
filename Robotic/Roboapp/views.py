@@ -36,19 +36,22 @@ def forgot_password(request):
 
 def login_user(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+
+        if not username or not password:
+            messages.error(request, "Please enter both username and password")
+            return render(request, 'auth/login.html')
 
         user = authenticate(request, username=username, password=password)
 
         # Check if the user exists
         if user is not None:
-            # login(request, user)
             login(request, user)
             messages.success(request, "You are now logged in!")
             # Admin
             if user.is_superuser:
-                return redirect('/appointment')
+                return redirect('dashboard')
 
             # For Normal Users
             return redirect('dashboard')
@@ -60,9 +63,14 @@ def login_user(request):
 def register(request):
     """ Show the registration form """
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        confirm_password = request.POST.get('confirm_password', '')
+
+        # Validate inputs
+        if not username or not password or not confirm_password:
+            messages.error(request, "Please fill in all fields")
+            return render(request, 'auth/register.html')
 
         # Check the password
         if password == confirm_password:
@@ -77,7 +85,7 @@ def register(request):
 
                 # Display a message
                 messages.success(request, "Account created successfully")
-                return redirect('/login/')
+                return redirect('login')
             
     
         else:
