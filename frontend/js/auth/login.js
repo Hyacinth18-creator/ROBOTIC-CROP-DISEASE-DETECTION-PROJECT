@@ -1,4 +1,4 @@
-// Handles login validation and backend-ready submission.
+// Handles temporary SmartAI login until backend authentication is ready.
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("[data-login-form]");
   const message = document.querySelector("[data-form-message]");
@@ -7,35 +7,34 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  form.addEventListener("submit", async (event) => {
+  const validEmail = "smarttest@gmail.com";
+  const validPassword = "@smartai";
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const data = window.SmartAIUtils.getFormData(form);
+    const email = (data.email || "").trim().toLowerCase();
+    const password = data.password || "";
 
-    if (!window.SmartAIUtils.isEmail(data.email || "")) {
+    if (!window.SmartAIUtils.isEmail(email)) {
       window.SmartAIUtils.setMessage(message, "Enter a valid email address.", "error");
       return;
     }
 
-    if (!data.password || data.password.length < 8) {
-      window.SmartAIUtils.setMessage(message, "Password must be at least 8 characters.", "error");
+    if (email !== validEmail || password !== validPassword) {
+      window.SmartAIUtils.setMessage(message, "Invalid email or password.", "error");
       return;
     }
 
-    try {
-      window.SmartAIUtils.setMessage(message, "Signing in...", "");
-      await window.SmartAIApi.login(data);
-      window.SmartAIUtils.setMessage(message, "Login successful. Preparing your dashboard...", "success");
-      showAppLoader(
-        "Preparing your dashboard",
-        "SmartAI is gathering your farm insights, recent detections, and treatment priorities."
-      );
-      window.setTimeout(() => {
-        window.location.href = "../dashboard/dashboard.html";
-      }, 2000);
-    } catch (error) {
-      window.SmartAIUtils.setMessage(message, error.message, "error");
-    }
+    window.SmartAIUtils.setMessage(message, "Login successful. Preparing your dashboard...", "success");
+    showAppLoader(
+      "Preparing your dashboard",
+      "SmartAI is gathering your farm insights, recent detections, and treatment priorities."
+    );
+    window.setTimeout(() => {
+      window.location.href = form.dataset.dashboardUrl || "../dashboard/dashboard.html";
+    }, 1000);
   });
 });
 
