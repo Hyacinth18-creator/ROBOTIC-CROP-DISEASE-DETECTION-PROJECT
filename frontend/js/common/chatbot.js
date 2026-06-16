@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSend = document.getElementById('chatbot-send');
 
+  if (!chatbotWidget || !chatbotToggle) {
+    console.warn('Chatbot elements not found');
+    return;
+  }
+
   let isDragging = false;
   let offsetX, offsetY;
 
@@ -23,35 +28,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (x + chatbotWidget.offsetWidth > body.width) x = body.width - chatbotWidget.offsetWidth;
     if (y + chatbotWidget.offsetHeight > body.height) y = body.height - chatbotWidget.offsetHeight;
 
-
     chatbotWidget.style.left = `${x}px`;
     chatbotWidget.style.top = `${y}px`;
     chatbotWidget.style.right = 'auto';
     chatbotWidget.style.bottom = 'auto';
   };
 
-  chatbotHeader.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - chatbotWidget.getBoundingClientRect().left;
-    offsetY = e.clientY - chatbotWidget.getBoundingClientRect().top;
-    document.addEventListener('mousemove', move);
-    document.addEventListener('mouseup', () => {
-      isDragging = false;
-      document.removeEventListener('mousemove', move);
+  if (chatbotHeader) {
+    chatbotHeader.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - chatbotWidget.getBoundingClientRect().left;
+      offsetY = e.clientY - chatbotWidget.getBoundingClientRect().top;
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', move);
+      });
     });
-  });
-
+  }
 
   // --- Toggle Chatbot ---
   chatbotToggle.addEventListener('click', () => {
     chatbotWidget.classList.toggle('open');
-    chatbotToggle.style.display = 'none';
+    chatbotToggle.style.display = chatbotWidget.classList.contains('open') ? 'none' : 'flex';
   });
 
-  closeChatbot.addEventListener('click', () => {
-    chatbotWidget.classList.remove('open');
-    chatbotToggle.style.display = 'flex';
-  });
+  if (closeChatbot) {
+    closeChatbot.addEventListener('click', () => {
+      chatbotWidget.classList.remove('open');
+      chatbotToggle.style.display = 'flex';
+    });
+  }
 
   // --- Chat Functionality ---
   const addMessage = (text, sender) => {
@@ -70,11 +77,18 @@ document.addEventListener('DOMContentLoaded', () => {
     chatbotInput.value = '';
 
     try {
+      const groqApiKey = window.GROQ_API_KEY || localStorage.getItem('groq_api_key');
+      
+      if (!groqApiKey) {
+        addMessage('I am here to help with your crop disease detection questions! Please try again.', 'bot');
+        return;
+      }
+
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GROQ_API_KEY}`
+          'Authorization': `Bearer ${groqApiKey}`
         },
         body: JSON.stringify({
           model: 'llama3-8b-8192',
@@ -87,23 +101,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const data = await response.json();
-      const botMessage = data.choices[0]?.message?.content.trim();
+      const botMessage = data.choices[0]?.message?.content?.trim();
       if (botMessage) {
         addMessage(botMessage, 'bot');
       }
     } catch (error) {
       console.error('Error fetching from Groq API:', error);
-      addMessage('Sorry, something went wrong. Please try again.', 'bot');
+      addMessage('Sorry, I am having trouble connecting. Please try again later.', 'bot');
     }
   };
 
-  chatbotSend.addEventListener('click', sendMessage);
-  chatbotInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
-  });
+  if (chatbotSend) {
+    chatbotSend.addEventListener('click', sendMessage);
+  }
+
+  if (chatbotInput) {
+    chatbotInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  }
 
   // Initial bot message
-  addMessage('Hello! How can I help you with your crops today?', 'bot');
+  addMessage('Hello! How can I help you with your crops today? 🌾', 'bot');
 });
