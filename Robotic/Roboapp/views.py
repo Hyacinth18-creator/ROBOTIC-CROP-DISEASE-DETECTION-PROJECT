@@ -59,7 +59,23 @@ def treatmenthistory(request):
     return render(request, 'dashboard/treatmenthistory.html')
 
 
+@require_http_methods(["GET", "POST"])
+@csrf_protect
 def forgot_password(request):
+    if request.method == "POST":
+        email = request.POST.get('email', '').strip()
+        if not email:
+            messages.error(request, "Please enter your email address")
+            return render(request, 'auth/forgot-password.html')
+
+        # Always show a generic success message, whether or not the email
+        # exists, so the form does not leak which accounts are registered.
+        messages.success(
+            request,
+            "If an account exists for that email, reset instructions have been sent."
+        )
+        return render(request, 'auth/forgot-password.html')
+
     return render(request, 'auth/forgot-password.html')
 
 
