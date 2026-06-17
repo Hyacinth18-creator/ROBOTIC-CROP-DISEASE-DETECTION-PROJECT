@@ -106,7 +106,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Plain (non-manifest) whitenoise storage: serves static files under their
+# original names and will not raise an error if a template references a
+# static file that is missing or hasn't been hashed into a manifest yet.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
