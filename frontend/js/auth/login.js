@@ -1,4 +1,4 @@
-// Handles temporary SmartAI login until backend authentication is ready.
+// Handles SmartAI login with backend authentication support.
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("[data-login-form]");
   const message = document.querySelector("[data-form-message]");
@@ -7,34 +7,46 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const validEmail = "smarttest@gmail.com";
-  const validPassword = "@smartai";
-
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const data = window.SmartAIUtils.getFormData(form);
-    const email = (data.email || "").trim().toLowerCase();
+    const emailOrUsername = (data.email || "").trim().toLowerCase();
     const password = data.password || "";
 
-    if (!window.SmartAIUtils.isEmail(email)) {
-      window.SmartAIUtils.setMessage(message, "Enter a valid email address.", "error");
+    // Validate inputs
+    if (!emailOrUsername) {
+      window.SmartAIUtils.setMessage(message, "Please enter your email or username.", "error");
       return;
     }
 
-    if (email !== validEmail || password !== validPassword) {
-      window.SmartAIUtils.setMessage(message, "Invalid email or password.", "error");
+    if (!password) {
+      window.SmartAIUtils.setMessage(message, "Please enter your password.", "error");
       return;
     }
 
-    window.SmartAIUtils.setMessage(message, "Login successful. Preparing your dashboard...", "success");
-    showAppLoader(
-      "Preparing your dashboard",
-      "SmartAI is gathering your farm insights, recent detections, and treatment priorities."
-    );
-    window.setTimeout(() => {
-      window.location.href = form.dataset.dashboardUrl || "../dashboard/dashboard.html";
-    }, 1000);
+    try {
+      window.SmartAIUtils.setMessage(message, "Signing you in...", "");
+      
+      // Call backend authentication
+      const response = await window.SmartAIApi.login({
+        username: emailOrUsername,
+        email: emailOrUsername,
+        password: password
+      });
+
+      window.SmartAIUtils.setMessage(message, "Login successful. Preparing your dashboard...", "success");
+      showAppLoader(
+        "Preparing your dashboard",
+        "SmartAI is gathering your farm insights, recent detections, and treatment priorities."
+      );
+      
+      window.setTimeout(() => {
+        window.location.href = form.dataset.dashboardUrl || "../dashboard/dashboard.html";
+      }, 1500);
+    } catch (error) {
+      window.SmartAIUtils.setMessage(message, error.message || "Invalid email or password.", "error");
+    }
   });
 });
 

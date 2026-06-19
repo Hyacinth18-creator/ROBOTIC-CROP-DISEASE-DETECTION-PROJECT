@@ -1,6 +1,8 @@
 // Central configuration for API and environment values.
 window.SmartAIConfig = {
-  API_URL: "http://localhost:5000/api",
+  API_URL: window.location.origin.includes('localhost') 
+    ? "http://localhost:8000/api" 
+    : "/api",
   APP_NAME: "SmartAI",
   ENABLE_LIVE_DETECTION_API: false,
   ENDPOINTS: {
@@ -10,4 +12,8 @@ window.SmartAIConfig = {
     robotTelemetry: "/robot/telemetry",
     experimentResults: "/experiments/results",
   },
+  CHATBOT_ENABLED: true,
 };
+
+// Load Groq API Key from environment or localStorage
+window.GROQ_API_KEY = window.GROQ_API_KEY || localStorage.getItem('groq_api_key') || '';

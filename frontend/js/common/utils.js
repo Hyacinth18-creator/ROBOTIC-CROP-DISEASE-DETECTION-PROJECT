@@ -1,106 +1,77 @@
-// Shared UI helpers for components, menus, and forms.
+// Utility functions for SmartAI application
 window.SmartAIUtils = {
-  async loadComponents() {
-    const targets = document.querySelectorAll("[data-component]");
-
-    await Promise.all(Array.from(targets).map(async (target) => {
-      const source = target.getAttribute("data-component");
-      try {
-        const response = await fetch(source);
-
-        if (!response.ok) {
-          return;
-        }
-
-        target.innerHTML = await response.text();
-      } catch (error) {
-        // Component loading can fail when the page is opened directly from disk.
-      }
-    }));
-
-    this.bindNavigation();
+  /**
+   * Validate email format
+   */
+  isEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   },
 
-  bindNavigation() {
-    const header = document.querySelector("[data-site-header]");
-    const toggle = document.querySelector("[data-menu-toggle]");
-    const menu = document.querySelector("[data-menu]");
-    const openIcon = document.querySelector("[data-menu-open-icon]");
-    const closeIcon = document.querySelector("[data-menu-close-icon]");
-    const label = document.querySelector("[data-menu-label]");
-
-    this.bindLandingHeader(header);
-
-    if (!toggle || !menu) {
-      return;
-    }
-
-    toggle.addEventListener("click", () => {
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      const nextOpen = !isOpen;
-
-      toggle.setAttribute("aria-expanded", String(nextOpen));
-      menu.classList.toggle("hidden", !nextOpen);
-      document.body.classList.toggle("menu-open", nextOpen);
-      header?.classList.toggle("is-menu-open", nextOpen);
-      openIcon?.classList.toggle("hidden", nextOpen);
-      closeIcon?.classList.toggle("hidden", !nextOpen);
-
-      if (label) {
-        label.textContent = nextOpen ? "Close navigation menu" : "Open navigation menu";
-      }
-    });
-
-    menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        toggle.setAttribute("aria-expanded", "false");
-        menu.classList.add("hidden");
-        document.body.classList.remove("menu-open");
-        header?.classList.remove("is-menu-open");
-        openIcon?.classList.remove("hidden");
-        closeIcon?.classList.add("hidden");
-
-        if (label) {
-          label.textContent = "Open navigation menu";
-        }
-      });
-    });
-  },
-
-  bindLandingHeader(header) {
-    const isLandingPage = document.body.dataset.page === "landing";
-
-    if (!header || !isLandingPage) {
-      return;
-    }
-
-    const syncHeader = () => {
-      header.classList.add("is-landing-nav");
-      header.classList.toggle("is-scrolled", window.scrollY > 16);
-    };
-
-    syncHeader();
-    window.addEventListener("scroll", syncHeader, { passive: true });
-  },
-
-  setMessage(element, message, state) {
-    if (!element) {
-      return;
-    }
-
-    element.textContent = message;
-    element.dataset.state = state || "";
-  },
-
+  /**
+   * Get form data as object
+   */
   getFormData(form) {
-    return Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    return data;
   },
 
-  isEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  /**
+   * Set form message with optional styling
+   */
+  setMessage(element, message, type = '') {
+    if (!element) return;
+    element.textContent = message;
+    element.className = 'form-message';
+    if (type) {
+      element.classList.add(`form-message-${type}`);
+    }
+  },
+
+  /**
+   * Validate password strength
+   */
+  isStrongPassword(password) {
+    return password.length >= 8;
+  },
+
+  /**
+   * Format date to readable string
+   */
+  formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString('en-US', options);
+  },
+
+  /**
+   * Debounce function for performance optimization
+   */
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  },
+
+  /**
+   * Show loading state on element
+   */
+  setLoading(element, isLoading) {
+    if (isLoading) {
+      element.disabled = true;
+      element.classList.add('is-loading');
+    } else {
+      element.disabled = false;
+      element.classList.remove('is-loading');
+    }
   },
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-  window.SmartAIUtils.loadComponents();
-});
