@@ -16,6 +16,12 @@ urlpatterns = [
 
      path('farmsimulation/', views.farmsimulation, name='farmsimulation'),
 
+     path('robotic-operations/', views.robotic_operations, name='robotic-operations'),
+
+     path('treatment-missions/', views.treatment_missions, name='treatment-missions'),
+
+     path('experiments/', views.experiments, name='experiments'),
+
      path('profile/', views.profile, name='profile'),
 
      path('reports/', views.reports, name='reports'),

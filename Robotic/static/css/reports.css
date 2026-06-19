@@ -1,6 +1,8 @@
 .page-hero,
 .report-builder,
 .recent-reports {
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid var(--dashboard-border);
   border-radius: 0.5rem;
   background: #ffffff;
@@ -11,8 +13,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
   margin-top: 1.25rem;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .page-kicker {
@@ -26,9 +29,11 @@
 .page-hero h1 {
   margin: 0;
   font-size: clamp(1.7rem, 4vw, 2.45rem);
+  line-height: 1.1;
 }
 
 .page-hero p {
+  overflow-wrap: anywhere;
   max-width: 44rem;
   margin: 0.45rem 0 0;
   color: var(--dashboard-muted);
@@ -37,7 +42,10 @@
 
 .report-button,
 .report-builder button {
-  width: fit-content;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 0.5rem;
   background: #6d28d9;
@@ -50,6 +58,8 @@
 
 .reports-grid {
   display: grid;
+  min-width: 0;
+  max-width: 100%;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -78,6 +88,8 @@
 }
 
 .report-builder select {
+  width: 100%;
+  min-width: 0;
   min-height: 2.6rem;
   border: 1px solid var(--dashboard-border);
   border-radius: 0.45rem;
@@ -94,11 +106,13 @@
 
 .recent-reports li {
   display: grid;
+  min-width: 0;
   gap: 0.25rem;
   border-radius: 0.45rem;
   background: #f5f3ff;
   padding: 0.8rem;
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .recent-reports span {
@@ -111,6 +125,15 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .page-hero {
+    padding: 1.25rem;
+  }
+
+  .report-button,
+  .report-builder button {
+    width: fit-content;
   }
 
   .reports-grid {

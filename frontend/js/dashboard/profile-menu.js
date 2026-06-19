@@ -1,9 +1,26 @@
 (() => {
   const selector = ".profile-button";
   const signOutSelector = ".dashboard-logout";
+  const dashboardNavigation = [
+    { label: "Dashboard", href: "dashboard.html", route: "/dashboard/", page: "dashboard", icon: '<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path>' },
+    { label: "Disease Detection", href: "diseasedetection.html", route: "/diseasedetection/", page: "diseasedetection", icon: '<circle cx="12" cy="12" r="8"></circle>' },
+    { label: "Robotic Operations", href: "robotic-operations.html", route: "/robotic-operations/", page: "robotic-operations", stroke: true, icon: '<path d="M7 14h10l2 4H5l2-4zM9 10h6v4H9zM10 6h4v4h-4zM8 18v2M16 18v2"></path>' },
+    { label: "Farm Simulation", href: "farmsimulation.html", route: "/farmsimulation/", page: "farmsimulation", icon: '<path d="M12 3 21 12 12 21 3 12z"></path>' },
+    { label: "Treatment Missions", href: "treatment-missions.html", route: "/treatment-missions/", page: "treatment-missions", stroke: true, icon: '<path d="M5 12h14M12 5v14M7 7l10 10"></path>' },
+    { label: "Experiments", href: "experiments.html", route: "/experiments/", page: "experiments", stroke: true, icon: '<path d="M7 4v6a5 5 0 1 0 10 0V4M9 4h6M8 16h8"></path>' },
+    { label: "Analytics", href: "analytics.html", route: "/analytics/", page: "analytics", stroke: true, icon: '<path d="M6 20V12M12 20V5M18 20v-9"></path>' },
+    { label: "Reports", href: "reports.html", route: "/reports/", page: "reports", icon: '<path d="M6 3h8l4 4v14H6z"></path>' },
+    { label: "Profile", href: "profile.html", route: "/profile/", page: "profile", icon: '<path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm-8 9a8 8 0 0 1 16 0z"></path>' },
+    { label: "Settings", href: "settings.html", route: "/settings/", page: "settings", icon: '<path d="m12 2 2 4 4-1-1 4 4 3-4 3 1 4-4-1-2 4-2-4-4 1 1-4-4-3 4-3-1-4 4 1z"></path>' },
+  ];
   let activeMenu = null;
   let logoutModal = null;
   let lastFocusedElement = null;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    normalizeDashboardNavigation();
+    window.setTimeout(ensureMobileLogoutButton, 0);
+  });
 
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest(selector);
@@ -52,6 +69,63 @@
     toggle.setAttribute("aria-expanded", "true");
     menu.hidden = false;
     activeMenu = menu;
+  }
+
+  function normalizeDashboardNavigation() {
+    const nav = document.querySelector(".dashboard-sidebar .dashboard-nav");
+    if (!nav) {
+      return;
+    }
+
+    const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
+    const isStaticHtml = currentPage.endsWith(".html");
+    const bodyPage = document.body.dataset.page;
+    nav.innerHTML = "";
+
+    dashboardNavigation.forEach((item) => {
+      const link = document.createElement("a");
+      link.className = "dashboard-nav-link";
+      link.href = isStaticHtml ? item.href : item.route;
+      if (currentPage === item.href || bodyPage === item.page) {
+        link.classList.add("is-active");
+      }
+
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("class", item.stroke ? "nav-svg nav-svg-stroke" : "nav-svg");
+      icon.setAttribute("aria-hidden", "true");
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.innerHTML = item.icon;
+
+      const label = document.createElement("span");
+      label.textContent = item.label;
+
+      link.append(icon, label);
+      nav.append(link);
+    });
+  }
+
+  function ensureMobileLogoutButton() {
+    const mobileList = document.querySelector(".mobile-nav-list");
+    if (!mobileList || mobileList.querySelector("[data-mobile-logout]")) {
+      return;
+    }
+
+    const button = document.createElement("button");
+    button.className = "dashboard-nav-link dashboard-logout mobile-logout-button";
+    button.type = "button";
+    button.dataset.mobileLogout = "";
+
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.setAttribute("class", "nav-svg nav-svg-stroke");
+    icon.setAttribute("aria-hidden", "true");
+    icon.setAttribute("viewBox", "0 0 24 24");
+    icon.innerHTML = '<path d="M10 6H5v12h5M13 8l4 4-4 4M17 12H9"></path>';
+
+    const label = document.createElement("span");
+    label.textContent = "Log Out";
+
+    button.append(icon, label);
+    mobileList.append(button);
   }
 
   function closeProfileMenu() {
@@ -106,11 +180,26 @@
 
   function showLogoutConfirmation() {
     closeProfileMenu();
+    closeMobileNavigationPanel();
     lastFocusedElement = document.activeElement;
     logoutModal = getLogoutModal();
     logoutModal.hidden = false;
     document.body.classList.add("menu-open");
     logoutModal.querySelector("[data-logout-cancel]")?.focus();
+  }
+
+  function closeMobileNavigationPanel() {
+    const panel = document.querySelector("[data-mobile-nav]");
+    const toggle = document.querySelector("[data-mobile-nav-toggle]");
+    const label = document.querySelector("[data-mobile-nav-label]");
+
+    toggle?.setAttribute("aria-expanded", "false");
+    if (panel) {
+      panel.hidden = true;
+    }
+    if (label) {
+      label.textContent = "Open dashboard navigation";
+    }
   }
 
   function closeLogoutModal() {

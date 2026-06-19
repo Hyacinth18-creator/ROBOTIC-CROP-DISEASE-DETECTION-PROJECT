@@ -80,6 +80,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
+  min-width: 0;
   color: var(--dashboard-ink);
   text-decoration: none;
 }
@@ -202,16 +203,22 @@
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   border-bottom: 1px solid var(--dashboard-border);
   background: rgb(255 255 255 / 0.96);
   padding: 0.85rem 1rem;
   backdrop-filter: blur(12px);
 }
 
+.dashboard-brand-mobile > span:last-child {
+  min-width: 0;
+}
+
 .mobile-nav-toggle,
 .icon-button,
 .sidebar-toggle {
   display: inline-grid;
+  flex: 0 0 auto;
   width: 3.15rem;
   height: 3.15rem;
   place-items: center;
@@ -1555,7 +1562,7 @@ td {
   }
 
   .kpi-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .dashboard-grid {

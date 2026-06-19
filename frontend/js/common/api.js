@@ -59,4 +59,24 @@ window.SmartAIApi = {
     const query = new URLSearchParams(params).toString();
     return this.request(`/detection/history${query ? `?${query}` : ""}`);
   },
+
+  getRobotStatus() {
+    return this.request(window.SmartAIConfig.ENDPOINTS.robotStatus);
+  },
+
+  getRobotNavigation() {
+    return this.request(window.SmartAIConfig.ENDPOINTS.robotNavigation);
+  },
+
+  getRobotMissions() {
+    return this.request(window.SmartAIConfig.ENDPOINTS.robotMissions);
+  },
+
+  getRobotTelemetry() {
+    return this.request(window.SmartAIConfig.ENDPOINTS.robotTelemetry);
+  },
+
+  getExperimentResults() {
+    return this.request(window.SmartAIConfig.ENDPOINTS.experimentResults);
+  },
 };

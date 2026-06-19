@@ -18,16 +18,28 @@ const kpiData = [
     tone: "red",
   },
   {
-    label: "Treatments Applied",
-    value: "146",
-    change: "+24 completed this week",
-    tone: "blue",
-  },
-  {
     label: "Detection Accuracy",
     value: "96.7%",
     change: "+2.1% model improvement",
+    tone: "blue",
+  },
+  {
+    label: "Robot Missions",
+    value: "18",
+    change: "6 active precision routes",
     tone: "purple",
+  },
+  {
+    label: "Area Covered",
+    value: "412 ha",
+    change: "+38 ha autonomous coverage",
+    tone: "green",
+  },
+  {
+    label: "Battery Health",
+    value: "87%",
+    change: "2h 45m field endurance",
+    tone: "blue",
   },
 ];
 

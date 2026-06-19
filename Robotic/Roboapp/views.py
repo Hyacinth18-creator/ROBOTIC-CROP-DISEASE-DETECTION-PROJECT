@@ -19,6 +19,15 @@ def diseasedetection(request):
 def farmsimulation(request):
     return render(request, 'dashboard/farmsimulation.html')
 
+def robotic_operations(request):
+    return render(request, 'dashboard/robotic-operations.html')
+
+def treatment_missions(request):
+    return render(request, 'dashboard/treatment-missions.html')
+
+def experiments(request):
+    return render(request, 'dashboard/experiments.html')
+
 def profile(request):
     return render(request, 'dashboard/profile.html')
 
